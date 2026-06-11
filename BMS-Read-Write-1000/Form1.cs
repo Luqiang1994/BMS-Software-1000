@@ -90,7 +90,7 @@ namespace BMS_Read_Write_1000
 
         private void UpdateMonitorUI(BmsData data)
         {
-            labelBatCount.Text = data.TotalBatteryStrings.ToString();
+            //labelBatCount.Text = data.TotalBatteryStrings.ToString();
 
             SetComboValue(comboOCV, data.SingleMaxVoltage.ToString());
             SetComboValue(comboOCR, data.SingleMaxVoltageNo.ToString());
@@ -103,10 +103,10 @@ namespace BMS_Read_Write_1000
             SetComboValue(comboDC1, (data.Current / 1000.0).ToString("F2"));
             SetComboValue(comboDC2, (data.Current / 1000.0).ToString("F2"));
 
-            labelTotalVoltage.Text = $"{data.TotalVoltage / 1000.0:F3} V";
-            labelCurrent.Text = $"{data.Current / 1000.0:F2} A";
+            tx_TotalVoltage.Text = $"{data.TotalVoltage / 1000.0:F3} V";
+            tx_Current.Text = $"{data.Current / 1000.0:F2} A";
             labelSoc.Text = $"{data.StateOfCapacity / 10.0:F1} %";
-            labelTemp.Text = $"{data.MaxTemperature / 10.0:F1} °C";
+            //labelTemp.Text = $"{data.MaxTemperature / 10.0:F1} °C";
         }
 
         private void BtnReadConfig_Click(object? sender, EventArgs e)
@@ -160,9 +160,7 @@ namespace BMS_Read_Write_1000
 
         private void AppendLog(string msg)
         {
-            listLog.Items.Insert(0, msg);
-            while (listLog.Items.Count > 100)
-                listLog.Items.RemoveAt(listLog.Items.Count - 1);
+
         }
 
         private static void SetComboValue(ComboBox cb, string value)
@@ -199,5 +197,7 @@ namespace BMS_Read_Write_1000
             }
             base.Dispose(disposing);
         }
+
+
     }
 }
