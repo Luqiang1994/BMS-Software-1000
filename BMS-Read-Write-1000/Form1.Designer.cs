@@ -196,7 +196,6 @@ namespace BMS_Read_Write_1000
             dgvStatusInfo.Location = new Point(492, 7);
             dgvStatusInfo.Name = "dgvStatusInfo";
             dgvStatusInfo.RowHeadersVisible = false;
-            dgvStatusInfo.RowTemplate.Height = 25;
             dgvStatusInfo.Size = new Size(205, 537);
             dgvStatusInfo.TabIndex = 12;
             // 
@@ -217,7 +216,6 @@ namespace BMS_Read_Write_1000
             dgvCellVoltages.Location = new Point(238, 6);
             dgvCellVoltages.Name = "dgvCellVoltages";
             dgvCellVoltages.RowHeadersVisible = false;
-            dgvCellVoltages.RowTemplate.Height = 25;
             dgvCellVoltages.Size = new Size(248, 538);
             dgvCellVoltages.TabIndex = 11;
             // 
@@ -453,23 +451,23 @@ namespace BMS_Read_Write_1000
             // 
             // btnWriteConfig
             // 
-            btnWriteConfig.Enabled = false;
             btnWriteConfig.Location = new Point(397, 468);
             btnWriteConfig.Name = "btnWriteConfig";
             btnWriteConfig.Size = new Size(93, 31);
             btnWriteConfig.TabIndex = 18;
             btnWriteConfig.Text = "写入参数";
             btnWriteConfig.UseVisualStyleBackColor = true;
+            btnWriteConfig.Click += BtnWriteConfig_Click;
             // 
             // btnReadConfig
             // 
-            btnReadConfig.Enabled = false;
             btnReadConfig.Location = new Point(182, 468);
             btnReadConfig.Name = "btnReadConfig";
             btnReadConfig.Size = new Size(93, 31);
             btnReadConfig.TabIndex = 19;
             btnReadConfig.Text = "读取参数";
             btnReadConfig.UseVisualStyleBackColor = true;
+            btnReadConfig.Click += BtnReadConfig_Click;
             // 
             // groupBox15
             // 
@@ -681,7 +679,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboMosOverTempProtect
             // 
-            comboMosOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboMosOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F);
             comboMosOverTempProtect.FormattingEnabled = true;
             comboMosOverTempProtect.Location = new Point(120, 18);
             comboMosOverTempProtect.Name = "comboMosOverTempProtect";
@@ -690,7 +688,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboMosOverTempRestore
             // 
-            comboMosOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboMosOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F);
             comboMosOverTempRestore.FormattingEnabled = true;
             comboMosOverTempRestore.Location = new Point(120, 42);
             comboMosOverTempRestore.Name = "comboMosOverTempRestore";
@@ -767,7 +765,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboDischargeUnderTempRestore
             // 
-            comboDischargeUnderTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboDischargeUnderTempRestore.Font = new Font("Microsoft YaHei UI", 7F);
             comboDischargeUnderTempRestore.FormattingEnabled = true;
             comboDischargeUnderTempRestore.Location = new Point(151, 112);
             comboDischargeUnderTempRestore.Name = "comboDischargeUnderTempRestore";
@@ -776,7 +774,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboDischargeUnderTempProtect
             // 
-            comboDischargeUnderTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboDischargeUnderTempProtect.Font = new Font("Microsoft YaHei UI", 7F);
             comboDischargeUnderTempProtect.FormattingEnabled = true;
             comboDischargeUnderTempProtect.Location = new Point(151, 87);
             comboDischargeUnderTempProtect.Name = "comboDischargeUnderTempProtect";
@@ -785,7 +783,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboDischargeOverTempRestore
             // 
-            comboDischargeOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboDischargeOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F);
             comboDischargeOverTempRestore.FormattingEnabled = true;
             comboDischargeOverTempRestore.Location = new Point(151, 63);
             comboDischargeOverTempRestore.Name = "comboDischargeOverTempRestore";
@@ -794,7 +792,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboDischargeOverTempProtect
             // 
-            comboDischargeOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboDischargeOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F);
             comboDischargeOverTempProtect.FormattingEnabled = true;
             comboDischargeOverTempProtect.Location = new Point(151, 39);
             comboDischargeOverTempProtect.Name = "comboDischargeOverTempProtect";
@@ -803,7 +801,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboChargeUnderTempRestore
             // 
-            comboChargeUnderTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboChargeUnderTempRestore.Font = new Font("Microsoft YaHei UI", 7F);
             comboChargeUnderTempRestore.FormattingEnabled = true;
             comboChargeUnderTempRestore.Location = new Point(89, 112);
             comboChargeUnderTempRestore.Name = "comboChargeUnderTempRestore";
@@ -812,7 +810,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboChargeUnderTempProtect
             // 
-            comboChargeUnderTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboChargeUnderTempProtect.Font = new Font("Microsoft YaHei UI", 7F);
             comboChargeUnderTempProtect.FormattingEnabled = true;
             comboChargeUnderTempProtect.Location = new Point(89, 87);
             comboChargeUnderTempProtect.Name = "comboChargeUnderTempProtect";
@@ -821,7 +819,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboChargeOverTempRestore
             // 
-            comboChargeOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboChargeOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F);
             comboChargeOverTempRestore.FormattingEnabled = true;
             comboChargeOverTempRestore.Location = new Point(89, 63);
             comboChargeOverTempRestore.Name = "comboChargeOverTempRestore";
@@ -830,7 +828,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboChargeOverTempProtect
             // 
-            comboChargeOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboChargeOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F);
             comboChargeOverTempProtect.FormattingEnabled = true;
             comboChargeOverTempProtect.Location = new Point(89, 39);
             comboChargeOverTempProtect.Name = "comboChargeOverTempProtect";
@@ -1259,7 +1257,7 @@ namespace BMS_Read_Write_1000
             groupBox4.Controls.Add(labelSoc);
             groupBox4.Controls.Add(label20);
             groupBox4.Controls.Add(progressBarSoc);
-            groupBox4.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            groupBox4.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
             groupBox4.Location = new Point(720, 28);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(215, 552);
@@ -1270,7 +1268,7 @@ namespace BMS_Read_Write_1000
             // lblFirmwareVersion
             // 
             lblFirmwareVersion.AutoSize = true;
-            lblFirmwareVersion.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lblFirmwareVersion.Font = new Font("Microsoft YaHei UI", 9F);
             lblFirmwareVersion.Location = new Point(108, 502);
             lblFirmwareVersion.Name = "lblFirmwareVersion";
             lblFirmwareVersion.Size = new Size(18, 17);
@@ -1280,7 +1278,7 @@ namespace BMS_Read_Write_1000
             // lblHardwareVersion
             // 
             lblHardwareVersion.AutoSize = true;
-            lblHardwareVersion.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lblHardwareVersion.Font = new Font("Microsoft YaHei UI", 9F);
             lblHardwareVersion.Location = new Point(108, 475);
             lblHardwareVersion.Name = "lblHardwareVersion";
             lblHardwareVersion.Size = new Size(18, 17);
@@ -1290,7 +1288,7 @@ namespace BMS_Read_Write_1000
             // lblWarning
             // 
             lblWarning.AutoSize = true;
-            lblWarning.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWarning.Font = new Font("Microsoft YaHei UI", 9F);
             lblWarning.Location = new Point(81, 338);
             lblWarning.Name = "lblWarning";
             lblWarning.Size = new Size(20, 17);
@@ -1300,7 +1298,7 @@ namespace BMS_Read_Write_1000
             // label38
             // 
             label38.AutoSize = true;
-            label38.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label38.Font = new Font("Microsoft YaHei UI", 9F);
             label38.Location = new Point(43, 502);
             label38.Name = "label38";
             label38.Size = new Size(59, 17);
@@ -1310,7 +1308,7 @@ namespace BMS_Read_Write_1000
             // label36
             // 
             label36.AutoSize = true;
-            label36.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label36.Font = new Font("Microsoft YaHei UI", 9F);
             label36.Location = new Point(43, 475);
             label36.Name = "label36";
             label36.Size = new Size(59, 17);
@@ -1320,7 +1318,7 @@ namespace BMS_Read_Write_1000
             // label34
             // 
             label34.AutoSize = true;
-            label34.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label34.Font = new Font("Microsoft YaHei UI", 9F);
             label34.Location = new Point(43, 338);
             label34.Name = "label34";
             label34.Size = new Size(35, 17);
@@ -1330,7 +1328,7 @@ namespace BMS_Read_Write_1000
             // label33
             // 
             label33.AutoSize = true;
-            label33.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label33.Font = new Font("Microsoft YaHei UI", 9F);
             label33.Location = new Point(59, 307);
             label33.Name = "label33";
             label33.Size = new Size(61, 17);
@@ -1340,7 +1338,7 @@ namespace BMS_Read_Write_1000
             // label31
             // 
             label31.AutoSize = true;
-            label31.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label31.Font = new Font("Microsoft YaHei UI", 9F);
             label31.Location = new Point(59, 260);
             label31.Name = "label31";
             label31.Size = new Size(49, 17);
@@ -1350,7 +1348,7 @@ namespace BMS_Read_Write_1000
             // label29
             // 
             label29.AutoSize = true;
-            label29.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label29.Font = new Font("Microsoft YaHei UI", 9F);
             label29.Location = new Point(59, 212);
             label29.Name = "label29";
             label29.Size = new Size(32, 17);
@@ -1360,7 +1358,7 @@ namespace BMS_Read_Write_1000
             // label27
             // 
             label27.AutoSize = true;
-            label27.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label27.Font = new Font("Microsoft YaHei UI", 9F);
             label27.Location = new Point(59, 166);
             label27.Name = "label27";
             label27.Size = new Size(32, 17);
@@ -1402,7 +1400,7 @@ namespace BMS_Read_Write_1000
             // label32
             // 
             label32.AutoSize = true;
-            label32.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label32.Font = new Font("Microsoft YaHei UI", 9F);
             label32.Location = new Point(59, 282);
             label32.Name = "label32";
             label32.Size = new Size(61, 17);
@@ -1420,7 +1418,7 @@ namespace BMS_Read_Write_1000
             // label30
             // 
             label30.AutoSize = true;
-            label30.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label30.Font = new Font("Microsoft YaHei UI", 9F);
             label30.Location = new Point(59, 235);
             label30.Name = "label30";
             label30.Size = new Size(32, 17);
@@ -1438,7 +1436,7 @@ namespace BMS_Read_Write_1000
             // label28
             // 
             label28.AutoSize = true;
-            label28.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label28.Font = new Font("Microsoft YaHei UI", 9F);
             label28.Location = new Point(59, 187);
             label28.Name = "label28";
             label28.Size = new Size(32, 17);
@@ -1456,7 +1454,7 @@ namespace BMS_Read_Write_1000
             // label23
             // 
             label23.AutoSize = true;
-            label23.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label23.Font = new Font("Microsoft YaHei UI", 9F);
             label23.Location = new Point(59, 141);
             label23.Name = "label23";
             label23.Size = new Size(32, 17);
@@ -1474,7 +1472,7 @@ namespace BMS_Read_Write_1000
             // labelSoc
             // 
             labelSoc.AutoSize = true;
-            labelSoc.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelSoc.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
             labelSoc.ForeColor = Color.FromArgb(0, 192, 0);
             labelSoc.Location = new Point(81, 84);
             labelSoc.Name = "labelSoc";

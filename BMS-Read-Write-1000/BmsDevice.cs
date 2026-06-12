@@ -128,8 +128,8 @@ namespace BMS_Read_Write_1000
             for (int i = 0; i < 8 && i < temps.Length; i++)
                 data.Temperatures[i] = (short)temps[i];
 
-            ushort[] misc = ReadRegisters(BmsRegisters.MaxTemperature, 24);
-            if (misc.Length >= 24)
+            ushort[] misc = ReadRegisters(BmsRegisters.MaxTemperature, 25);
+            if (misc.Length >= 25)
             {
                 data.MaxTemperature = (short)misc[0];
                 data.MaxTemperatureNo = misc[1];
@@ -152,6 +152,7 @@ namespace BMS_Read_Write_1000
                 data.BalancedWord2 = misc[21];
                 data.DischargeMosState = misc[22];
                 data.ChargeMosState = misc[23];
+                data.BatteryType = misc[24];
             }
 
             return data;

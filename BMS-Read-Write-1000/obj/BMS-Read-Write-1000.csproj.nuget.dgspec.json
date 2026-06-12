@@ -1,32 +1,38 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub_Projects\\BMS-Software-1000\\BMS-Read-Write-1000\\BMS-Read-Write-1000.csproj": {}
+    "D:\\GitHubWorkSpace\\BMS-Read-Write-1000\\BMS-Read-Write-1000\\BMS-Read-Write-1000.csproj": {}
   },
   "projects": {
-    "D:\\GitHub_Projects\\BMS-Software-1000\\BMS-Read-Write-1000\\BMS-Read-Write-1000.csproj": {
+    "D:\\GitHubWorkSpace\\BMS-Read-Write-1000\\BMS-Read-Write-1000\\BMS-Read-Write-1000.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub_Projects\\BMS-Software-1000\\BMS-Read-Write-1000\\BMS-Read-Write-1000.csproj",
+        "projectUniqueName": "D:\\GitHubWorkSpace\\BMS-Read-Write-1000\\BMS-Read-Write-1000\\BMS-Read-Write-1000.csproj",
         "projectName": "BMS-Read-Write-1000",
-        "projectPath": "D:\\GitHub_Projects\\BMS-Software-1000\\BMS-Read-Write-1000\\BMS-Read-Write-1000.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub_Projects\\BMS-Software-1000\\BMS-Read-Write-1000\\obj\\",
+        "projectPath": "D:\\GitHubWorkSpace\\BMS-Read-Write-1000\\BMS-Read-Write-1000\\BMS-Read-Write-1000.csproj",
+        "packagesPath": "C:\\Users\\LQ\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHubWorkSpace\\BMS-Read-Write-1000\\BMS-Read-Write-1000\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LQ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0-windows"
+          "net8.0-windows7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0-windows7.0": {
-            "targetAlias": "net7.0-windows",
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows7.0",
             "projectReferences": {}
           }
         },
@@ -34,15 +40,21 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
-        "net7.0-windows7.0": {
-          "targetAlias": "net7.0-windows",
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows7.0",
           "dependencies": {
             "System.IO.Ports": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[10.0.9, )"
             }
           },
           "imports": [
@@ -64,7 +76,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
