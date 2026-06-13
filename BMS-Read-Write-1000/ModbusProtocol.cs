@@ -2,7 +2,7 @@ namespace BMS_Read_Write_1000
 {
     public static class BmsRegisters
     {
-        public const byte SlaveAddress = 0x97;
+        public static byte SlaveAddress = 0x97;
 
         public const ushort TotalBatteryStrings = 0x0200;
         public const ushort SingleVoltage1 = 0x0201;

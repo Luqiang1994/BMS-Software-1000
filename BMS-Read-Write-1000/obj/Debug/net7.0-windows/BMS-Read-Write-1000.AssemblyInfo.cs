@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BMS-Read-Write-1000")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48efc8f1923fcee72f3be3f260d76ec40d21b5cd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("BMS-Read-Write-1000")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BMS-Read-Write-1000")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

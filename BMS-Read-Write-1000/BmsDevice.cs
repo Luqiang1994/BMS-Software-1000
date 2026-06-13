@@ -29,6 +29,10 @@ namespace BMS_Read_Write_1000
         public ushort DischargeMosState { get; set; }
         public ushort ChargeMosState { get; set; }
         public ushort BatteryType { get; set; }
+
+        public ushort HardwareVersion { get; set; }
+        public ushort TotalNtcCount { get; set; }
+        public uint RemainingCapacity { get; set; }
     }
 
     public class BmsConfig
@@ -62,8 +66,7 @@ namespace BMS_Read_Write_1000
         public ushort Afe2BatteryStrings { get; set; }
         public short MosOvertempProtect { get; set; }
         public short MosOvertempRestore { get; set; }
-        public ushort HardwareVersion { get; set; }
-        public ushort TotalNtcCount { get; set; }
+        
     }
 
     public class BmsDevice : IDisposable
@@ -155,6 +158,15 @@ namespace BMS_Read_Write_1000
                 data.BatteryType = misc[24];
             }
 
+            ushort[] extra = ReadRegisters(BmsRegisters.HardwareVersion, 2);
+            if (extra.Length >= 2)
+            {
+                data.HardwareVersion = extra[0];
+                data.TotalNtcCount = extra[1];
+            }
+
+            ushort[] remain_capacity = ReadRegisters(BmsRegisters.RemainingCapacityHigh, 2);
+            data.RemainingCapacity = (uint)(remain_capacity[0] << 16 | remain_capacity[1]);
             return data;
         }
 
@@ -194,13 +206,6 @@ namespace BMS_Read_Write_1000
                 cfg.Afe2BatteryStrings = config[27];
                 cfg.MosOvertempProtect = (short)config[28];
                 cfg.MosOvertempRestore = (short)config[29];
-            }
-
-            ushort[] extra = ReadRegisters(BmsRegisters.HardwareVersion, 2);
-            if (extra.Length >= 2)
-            {
-                cfg.HardwareVersion = extra[0];
-                cfg.TotalNtcCount = extra[1];
             }
 
             return cfg;

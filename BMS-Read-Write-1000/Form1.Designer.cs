@@ -26,7 +26,7 @@ namespace BMS_Read_Write_1000
             label24 = new Label();
             groupBox16 = new GroupBox();
             comboSlaveAddress = new ComboBox();
-            button11 = new Button();
+            btn_StopMonitoring = new Button();
             label60 = new Label();
             groupBox5 = new GroupBox();
             button10 = new Button();
@@ -39,13 +39,13 @@ namespace BMS_Read_Write_1000
             btnWriteConfig = new Button();
             btnReadConfig = new Button();
             groupBox15 = new GroupBox();
-            button9 = new Button();
-            button8 = new Button();
-            button6 = new Button();
-            button4 = new Button();
-            button7 = new Button();
-            button5 = new Button();
-            button3 = new Button();
+            btn_RestoreFactoryDefault = new Button();
+            btn_CurrentZeroing = new Button();
+            btn_ChargeOffDischargeOff = new Button();
+            btn_ChargeOffDischargeOn = new Button();
+            btn_ExitManulMode = new Button();
+            btn_ChargeOnDischargeOn = new Button();
+            btn_ChargeOnDischargeOff = new Button();
             groupBox14 = new GroupBox();
             button2 = new Button();
             button1 = new Button();
@@ -54,9 +54,9 @@ namespace BMS_Read_Write_1000
             label59 = new Label();
             groupBox13 = new GroupBox();
             label58 = new Label();
-            comboDischargeCalibration = new ComboBox();
+            comboDischargeCorrection = new ComboBox();
             label57 = new Label();
-            comboChargeCalibration = new ComboBox();
+            comboChargeCorrection = new ComboBox();
             groupBox12 = new GroupBox();
             label56 = new Label();
             comboMosOverTempProtect = new ComboBox();
@@ -323,7 +323,7 @@ namespace BMS_Read_Write_1000
             // groupBox16
             // 
             groupBox16.Controls.Add(comboSlaveAddress);
-            groupBox16.Controls.Add(button11);
+            groupBox16.Controls.Add(btn_StopMonitoring);
             groupBox16.Controls.Add(label60);
             groupBox16.Location = new Point(6, 158);
             groupBox16.Name = "groupBox16";
@@ -340,14 +340,15 @@ namespace BMS_Read_Write_1000
             comboSlaveAddress.Size = new Size(59, 25);
             comboSlaveAddress.TabIndex = 1;
             // 
-            // button11
+            // btn_StopMonitoring
             // 
-            button11.Location = new Point(122, 13);
-            button11.Name = "button11";
-            button11.Size = new Size(90, 29);
-            button11.TabIndex = 4;
-            button11.Text = "停止监控";
-            button11.UseVisualStyleBackColor = true;
+            btn_StopMonitoring.Location = new Point(122, 13);
+            btn_StopMonitoring.Name = "btn_StopMonitoring";
+            btn_StopMonitoring.Size = new Size(90, 29);
+            btn_StopMonitoring.TabIndex = 4;
+            btn_StopMonitoring.Text = "停止监控";
+            btn_StopMonitoring.UseVisualStyleBackColor = true;
+            btn_StopMonitoring.Click += btn_StopMonitoring_Click;
             // 
             // label60
             // 
@@ -471,13 +472,13 @@ namespace BMS_Read_Write_1000
             // 
             // groupBox15
             // 
-            groupBox15.Controls.Add(button9);
-            groupBox15.Controls.Add(button8);
-            groupBox15.Controls.Add(button6);
-            groupBox15.Controls.Add(button4);
-            groupBox15.Controls.Add(button7);
-            groupBox15.Controls.Add(button5);
-            groupBox15.Controls.Add(button3);
+            groupBox15.Controls.Add(btn_RestoreFactoryDefault);
+            groupBox15.Controls.Add(btn_CurrentZeroing);
+            groupBox15.Controls.Add(btn_ChargeOffDischargeOff);
+            groupBox15.Controls.Add(btn_ChargeOffDischargeOn);
+            groupBox15.Controls.Add(btn_ExitManulMode);
+            groupBox15.Controls.Add(btn_ChargeOnDischargeOn);
+            groupBox15.Controls.Add(btn_ChargeOnDischargeOff);
             groupBox15.Location = new Point(455, 292);
             groupBox15.Name = "groupBox15";
             groupBox15.Size = new Size(216, 151);
@@ -485,68 +486,75 @@ namespace BMS_Read_Write_1000
             groupBox15.TabStop = false;
             groupBox15.Text = "命令测试";
             // 
-            // button9
+            // btn_RestoreFactoryDefault
             // 
-            button9.Location = new Point(58, 111);
-            button9.Name = "button9";
-            button9.Size = new Size(95, 23);
-            button9.TabIndex = 1;
-            button9.Text = "恢复出厂设置";
-            button9.UseVisualStyleBackColor = true;
+            btn_RestoreFactoryDefault.Location = new Point(58, 111);
+            btn_RestoreFactoryDefault.Name = "btn_RestoreFactoryDefault";
+            btn_RestoreFactoryDefault.Size = new Size(95, 23);
+            btn_RestoreFactoryDefault.TabIndex = 1;
+            btn_RestoreFactoryDefault.Text = "恢复出厂设置";
+            btn_RestoreFactoryDefault.UseVisualStyleBackColor = true;
+            btn_RestoreFactoryDefault.Click += btn_RestoreFactoryDefault_Click;
             // 
-            // button8
+            // btn_CurrentZeroing
             // 
-            button8.Location = new Point(115, 82);
-            button8.Name = "button8";
-            button8.Size = new Size(96, 23);
-            button8.TabIndex = 0;
-            button8.Text = "电流归零";
-            button8.UseVisualStyleBackColor = true;
+            btn_CurrentZeroing.Location = new Point(115, 82);
+            btn_CurrentZeroing.Name = "btn_CurrentZeroing";
+            btn_CurrentZeroing.Size = new Size(96, 23);
+            btn_CurrentZeroing.TabIndex = 0;
+            btn_CurrentZeroing.Text = "电流归零";
+            btn_CurrentZeroing.UseVisualStyleBackColor = true;
+            btn_CurrentZeroing.Click += btn_CurrentZeroing_Click;
             // 
-            // button6
+            // btn_ChargeOffDischargeOff
             // 
-            button6.Location = new Point(115, 54);
-            button6.Name = "button6";
-            button6.Size = new Size(96, 23);
-            button6.TabIndex = 0;
-            button6.Text = "充放关";
-            button6.UseVisualStyleBackColor = true;
+            btn_ChargeOffDischargeOff.Location = new Point(115, 54);
+            btn_ChargeOffDischargeOff.Name = "btn_ChargeOffDischargeOff";
+            btn_ChargeOffDischargeOff.Size = new Size(96, 23);
+            btn_ChargeOffDischargeOff.TabIndex = 0;
+            btn_ChargeOffDischargeOff.Text = "充放关";
+            btn_ChargeOffDischargeOff.UseVisualStyleBackColor = true;
+            btn_ChargeOffDischargeOff.Click += btn_ChargeOffDischargeOff_Click;
             // 
-            // button4
+            // btn_ChargeOffDischargeOn
             // 
-            button4.Location = new Point(115, 24);
-            button4.Name = "button4";
-            button4.Size = new Size(96, 23);
-            button4.TabIndex = 0;
-            button4.Text = "充关放开";
-            button4.UseVisualStyleBackColor = true;
+            btn_ChargeOffDischargeOn.Location = new Point(115, 24);
+            btn_ChargeOffDischargeOn.Name = "btn_ChargeOffDischargeOn";
+            btn_ChargeOffDischargeOn.Size = new Size(96, 23);
+            btn_ChargeOffDischargeOn.TabIndex = 0;
+            btn_ChargeOffDischargeOn.Text = "充关放开";
+            btn_ChargeOffDischargeOn.UseVisualStyleBackColor = true;
+            btn_ChargeOffDischargeOn.Click += btn_ChargeOffDischargeOn_Click;
             // 
-            // button7
+            // btn_ExitManulMode
             // 
-            button7.Location = new Point(13, 82);
-            button7.Name = "button7";
-            button7.Size = new Size(96, 23);
-            button7.TabIndex = 0;
-            button7.Text = "退出手动模式";
-            button7.UseVisualStyleBackColor = true;
+            btn_ExitManulMode.Location = new Point(13, 82);
+            btn_ExitManulMode.Name = "btn_ExitManulMode";
+            btn_ExitManulMode.Size = new Size(96, 23);
+            btn_ExitManulMode.TabIndex = 0;
+            btn_ExitManulMode.Text = "退出手动模式";
+            btn_ExitManulMode.UseVisualStyleBackColor = true;
+            btn_ExitManulMode.Click += btn_ExitManulMode_Click;
             // 
-            // button5
+            // btn_ChargeOnDischargeOn
             // 
-            button5.Location = new Point(13, 54);
-            button5.Name = "button5";
-            button5.Size = new Size(96, 23);
-            button5.TabIndex = 0;
-            button5.Text = "充放开";
-            button5.UseVisualStyleBackColor = true;
+            btn_ChargeOnDischargeOn.Location = new Point(13, 54);
+            btn_ChargeOnDischargeOn.Name = "btn_ChargeOnDischargeOn";
+            btn_ChargeOnDischargeOn.Size = new Size(96, 23);
+            btn_ChargeOnDischargeOn.TabIndex = 0;
+            btn_ChargeOnDischargeOn.Text = "充放开";
+            btn_ChargeOnDischargeOn.UseVisualStyleBackColor = true;
+            btn_ChargeOnDischargeOn.Click += btn_ChargeOnDischargeOn_Click;
             // 
-            // button3
+            // btn_ChargeOnDischargeOff
             // 
-            button3.Location = new Point(13, 24);
-            button3.Name = "button3";
-            button3.Size = new Size(96, 23);
-            button3.TabIndex = 0;
-            button3.Text = "充开放关";
-            button3.UseVisualStyleBackColor = true;
+            btn_ChargeOnDischargeOff.Location = new Point(13, 24);
+            btn_ChargeOnDischargeOff.Name = "btn_ChargeOnDischargeOff";
+            btn_ChargeOnDischargeOff.Size = new Size(96, 23);
+            btn_ChargeOnDischargeOff.TabIndex = 0;
+            btn_ChargeOnDischargeOff.Text = "充开放关";
+            btn_ChargeOnDischargeOff.UseVisualStyleBackColor = true;
+            btn_ChargeOnDischargeOff.Click += btn_ChargeOnDischargeOff_Click;
             // 
             // groupBox14
             // 
@@ -611,9 +619,9 @@ namespace BMS_Read_Write_1000
             // groupBox13
             // 
             groupBox13.Controls.Add(label58);
-            groupBox13.Controls.Add(comboDischargeCalibration);
+            groupBox13.Controls.Add(comboDischargeCorrection);
             groupBox13.Controls.Add(label57);
-            groupBox13.Controls.Add(comboChargeCalibration);
+            groupBox13.Controls.Add(comboChargeCorrection);
             groupBox13.Location = new Point(455, 6);
             groupBox13.Name = "groupBox13";
             groupBox13.Size = new Size(216, 84);
@@ -630,13 +638,13 @@ namespace BMS_Read_Write_1000
             label58.TabIndex = 0;
             label58.Text = "放电校正(mA):";
             // 
-            // comboDischargeCalibration
+            // comboDischargeCorrection
             // 
-            comboDischargeCalibration.FormattingEnabled = true;
-            comboDischargeCalibration.Location = new Point(131, 51);
-            comboDischargeCalibration.Name = "comboDischargeCalibration";
-            comboDischargeCalibration.Size = new Size(79, 25);
-            comboDischargeCalibration.TabIndex = 2;
+            comboDischargeCorrection.FormattingEnabled = true;
+            comboDischargeCorrection.Location = new Point(131, 51);
+            comboDischargeCorrection.Name = "comboDischargeCorrection";
+            comboDischargeCorrection.Size = new Size(79, 25);
+            comboDischargeCorrection.TabIndex = 2;
             // 
             // label57
             // 
@@ -647,13 +655,13 @@ namespace BMS_Read_Write_1000
             label57.TabIndex = 0;
             label57.Text = "充电校正(mA):";
             // 
-            // comboChargeCalibration
+            // comboChargeCorrection
             // 
-            comboChargeCalibration.FormattingEnabled = true;
-            comboChargeCalibration.Location = new Point(131, 20);
-            comboChargeCalibration.Name = "comboChargeCalibration";
-            comboChargeCalibration.Size = new Size(79, 25);
-            comboChargeCalibration.TabIndex = 2;
+            comboChargeCorrection.FormattingEnabled = true;
+            comboChargeCorrection.Location = new Point(131, 20);
+            comboChargeCorrection.Name = "comboChargeCorrection";
+            comboChargeCorrection.Size = new Size(79, 25);
+            comboChargeCorrection.TabIndex = 2;
             // 
             // groupBox12
             // 
@@ -679,7 +687,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboMosOverTempProtect
             // 
-            comboMosOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F);
+            comboMosOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboMosOverTempProtect.FormattingEnabled = true;
             comboMosOverTempProtect.Location = new Point(120, 18);
             comboMosOverTempProtect.Name = "comboMosOverTempProtect";
@@ -688,7 +696,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboMosOverTempRestore
             // 
-            comboMosOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F);
+            comboMosOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboMosOverTempRestore.FormattingEnabled = true;
             comboMosOverTempRestore.Location = new Point(120, 42);
             comboMosOverTempRestore.Name = "comboMosOverTempRestore";
@@ -765,7 +773,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboDischargeUnderTempRestore
             // 
-            comboDischargeUnderTempRestore.Font = new Font("Microsoft YaHei UI", 7F);
+            comboDischargeUnderTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboDischargeUnderTempRestore.FormattingEnabled = true;
             comboDischargeUnderTempRestore.Location = new Point(151, 112);
             comboDischargeUnderTempRestore.Name = "comboDischargeUnderTempRestore";
@@ -774,7 +782,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboDischargeUnderTempProtect
             // 
-            comboDischargeUnderTempProtect.Font = new Font("Microsoft YaHei UI", 7F);
+            comboDischargeUnderTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboDischargeUnderTempProtect.FormattingEnabled = true;
             comboDischargeUnderTempProtect.Location = new Point(151, 87);
             comboDischargeUnderTempProtect.Name = "comboDischargeUnderTempProtect";
@@ -783,7 +791,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboDischargeOverTempRestore
             // 
-            comboDischargeOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F);
+            comboDischargeOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboDischargeOverTempRestore.FormattingEnabled = true;
             comboDischargeOverTempRestore.Location = new Point(151, 63);
             comboDischargeOverTempRestore.Name = "comboDischargeOverTempRestore";
@@ -792,7 +800,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboDischargeOverTempProtect
             // 
-            comboDischargeOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F);
+            comboDischargeOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboDischargeOverTempProtect.FormattingEnabled = true;
             comboDischargeOverTempProtect.Location = new Point(151, 39);
             comboDischargeOverTempProtect.Name = "comboDischargeOverTempProtect";
@@ -801,7 +809,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboChargeUnderTempRestore
             // 
-            comboChargeUnderTempRestore.Font = new Font("Microsoft YaHei UI", 7F);
+            comboChargeUnderTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboChargeUnderTempRestore.FormattingEnabled = true;
             comboChargeUnderTempRestore.Location = new Point(89, 112);
             comboChargeUnderTempRestore.Name = "comboChargeUnderTempRestore";
@@ -810,7 +818,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboChargeUnderTempProtect
             // 
-            comboChargeUnderTempProtect.Font = new Font("Microsoft YaHei UI", 7F);
+            comboChargeUnderTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboChargeUnderTempProtect.FormattingEnabled = true;
             comboChargeUnderTempProtect.Location = new Point(89, 87);
             comboChargeUnderTempProtect.Name = "comboChargeUnderTempProtect";
@@ -819,7 +827,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboChargeOverTempRestore
             // 
-            comboChargeOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F);
+            comboChargeOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboChargeOverTempRestore.FormattingEnabled = true;
             comboChargeOverTempRestore.Location = new Point(89, 63);
             comboChargeOverTempRestore.Name = "comboChargeOverTempRestore";
@@ -828,7 +836,7 @@ namespace BMS_Read_Write_1000
             // 
             // comboChargeOverTempProtect
             // 
-            comboChargeOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F);
+            comboChargeOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboChargeOverTempProtect.FormattingEnabled = true;
             comboChargeOverTempProtect.Location = new Point(89, 39);
             comboChargeOverTempProtect.Name = "comboChargeOverTempProtect";
@@ -1257,7 +1265,7 @@ namespace BMS_Read_Write_1000
             groupBox4.Controls.Add(labelSoc);
             groupBox4.Controls.Add(label20);
             groupBox4.Controls.Add(progressBarSoc);
-            groupBox4.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            groupBox4.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             groupBox4.Location = new Point(720, 28);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(215, 552);
@@ -1268,7 +1276,7 @@ namespace BMS_Read_Write_1000
             // lblFirmwareVersion
             // 
             lblFirmwareVersion.AutoSize = true;
-            lblFirmwareVersion.Font = new Font("Microsoft YaHei UI", 9F);
+            lblFirmwareVersion.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             lblFirmwareVersion.Location = new Point(108, 502);
             lblFirmwareVersion.Name = "lblFirmwareVersion";
             lblFirmwareVersion.Size = new Size(18, 17);
@@ -1278,7 +1286,7 @@ namespace BMS_Read_Write_1000
             // lblHardwareVersion
             // 
             lblHardwareVersion.AutoSize = true;
-            lblHardwareVersion.Font = new Font("Microsoft YaHei UI", 9F);
+            lblHardwareVersion.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             lblHardwareVersion.Location = new Point(108, 475);
             lblHardwareVersion.Name = "lblHardwareVersion";
             lblHardwareVersion.Size = new Size(18, 17);
@@ -1288,7 +1296,7 @@ namespace BMS_Read_Write_1000
             // lblWarning
             // 
             lblWarning.AutoSize = true;
-            lblWarning.Font = new Font("Microsoft YaHei UI", 9F);
+            lblWarning.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             lblWarning.Location = new Point(81, 338);
             lblWarning.Name = "lblWarning";
             lblWarning.Size = new Size(20, 17);
@@ -1298,7 +1306,7 @@ namespace BMS_Read_Write_1000
             // label38
             // 
             label38.AutoSize = true;
-            label38.Font = new Font("Microsoft YaHei UI", 9F);
+            label38.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label38.Location = new Point(43, 502);
             label38.Name = "label38";
             label38.Size = new Size(59, 17);
@@ -1308,7 +1316,7 @@ namespace BMS_Read_Write_1000
             // label36
             // 
             label36.AutoSize = true;
-            label36.Font = new Font("Microsoft YaHei UI", 9F);
+            label36.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label36.Location = new Point(43, 475);
             label36.Name = "label36";
             label36.Size = new Size(59, 17);
@@ -1318,7 +1326,7 @@ namespace BMS_Read_Write_1000
             // label34
             // 
             label34.AutoSize = true;
-            label34.Font = new Font("Microsoft YaHei UI", 9F);
+            label34.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label34.Location = new Point(43, 338);
             label34.Name = "label34";
             label34.Size = new Size(35, 17);
@@ -1328,7 +1336,7 @@ namespace BMS_Read_Write_1000
             // label33
             // 
             label33.AutoSize = true;
-            label33.Font = new Font("Microsoft YaHei UI", 9F);
+            label33.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label33.Location = new Point(59, 307);
             label33.Name = "label33";
             label33.Size = new Size(61, 17);
@@ -1338,7 +1346,7 @@ namespace BMS_Read_Write_1000
             // label31
             // 
             label31.AutoSize = true;
-            label31.Font = new Font("Microsoft YaHei UI", 9F);
+            label31.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label31.Location = new Point(59, 260);
             label31.Name = "label31";
             label31.Size = new Size(49, 17);
@@ -1348,7 +1356,7 @@ namespace BMS_Read_Write_1000
             // label29
             // 
             label29.AutoSize = true;
-            label29.Font = new Font("Microsoft YaHei UI", 9F);
+            label29.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label29.Location = new Point(59, 212);
             label29.Name = "label29";
             label29.Size = new Size(32, 17);
@@ -1358,7 +1366,7 @@ namespace BMS_Read_Write_1000
             // label27
             // 
             label27.AutoSize = true;
-            label27.Font = new Font("Microsoft YaHei UI", 9F);
+            label27.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label27.Location = new Point(59, 166);
             label27.Name = "label27";
             label27.Size = new Size(32, 17);
@@ -1400,7 +1408,7 @@ namespace BMS_Read_Write_1000
             // label32
             // 
             label32.AutoSize = true;
-            label32.Font = new Font("Microsoft YaHei UI", 9F);
+            label32.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label32.Location = new Point(59, 282);
             label32.Name = "label32";
             label32.Size = new Size(61, 17);
@@ -1418,7 +1426,7 @@ namespace BMS_Read_Write_1000
             // label30
             // 
             label30.AutoSize = true;
-            label30.Font = new Font("Microsoft YaHei UI", 9F);
+            label30.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label30.Location = new Point(59, 235);
             label30.Name = "label30";
             label30.Size = new Size(32, 17);
@@ -1436,7 +1444,7 @@ namespace BMS_Read_Write_1000
             // label28
             // 
             label28.AutoSize = true;
-            label28.Font = new Font("Microsoft YaHei UI", 9F);
+            label28.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label28.Location = new Point(59, 187);
             label28.Name = "label28";
             label28.Size = new Size(32, 17);
@@ -1454,7 +1462,7 @@ namespace BMS_Read_Write_1000
             // label23
             // 
             label23.AutoSize = true;
-            label23.Font = new Font("Microsoft YaHei UI", 9F);
+            label23.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label23.Location = new Point(59, 141);
             label23.Name = "label23";
             label23.Size = new Size(32, 17);
@@ -1472,7 +1480,7 @@ namespace BMS_Read_Write_1000
             // labelSoc
             // 
             labelSoc.AutoSize = true;
-            labelSoc.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold);
+            labelSoc.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             labelSoc.ForeColor = Color.FromArgb(0, 192, 0);
             labelSoc.Location = new Point(81, 84);
             labelSoc.Name = "labelSoc";
@@ -1611,21 +1619,21 @@ namespace BMS_Read_Write_1000
         private ComboBox comboFwBaudRate;
         private Label label59;
         private Label label58;
-        private ComboBox comboDischargeCalibration;
-        private ComboBox comboChargeCalibration;
+        private ComboBox comboDischargeCorrection;
+        private ComboBox comboChargeCorrection;
         private RichTextBox richTextBox1;
         private GroupBox groupBox15;
-        private Button button8;
-        private Button button6;
-        private Button button4;
-        private Button button7;
-        private Button button5;
-        private Button button3;
+        private Button btn_CurrentZeroing;
+        private Button btn_ChargeOffDischargeOff;
+        private Button btn_ChargeOffDischargeOn;
+        private Button btn_ExitManulMode;
+        private Button btn_ChargeOnDischargeOn;
+        private Button btn_ChargeOnDischargeOff;
         private Button button2;
         private Button button1;
         private GroupBox groupBox16;
         private ComboBox comboSlaveAddress;
-        private Button button11;
+        private Button btn_StopMonitoring;
         private Label label60;
         private GroupBox groupBox5;
         private Button button10;
@@ -1634,7 +1642,7 @@ namespace BMS_Read_Write_1000
         private Label label25;
         private ComboBox comboPort;
         private Label label;
-        private Button button9;
+        private Button btn_RestoreFactoryDefault;
         private GroupBox groupBox17;
         private Label label62;
         private Label label61;
