@@ -38,8 +38,7 @@
               "RelativeToolTip": "BMS-Read-Write-1000\\BmsDevice.cs",
               "ViewState": "AgIAAEkAAAAAAAAAAAAkwKQAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T00:05:06.538Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-12T00:05:06.538Z"
             },
             {
               "$type": "Document",
@@ -51,8 +50,7 @@
               "RelativeToolTip": "BMS-Read-Write-1000\\ModbusProtocol.cs",
               "ViewState": "AgIAACEAAAAAAAAAAAAcwCMAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-11T23:54:05.007Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-11T23:54:05.007Z"
             },
             {
               "$type": "Document",
@@ -62,7 +60,7 @@
               "RelativeDocumentMoniker": "BMS-Read-Write-1000\\Form1.cs",
               "ToolTip": "D:\\GitHubWorkSpace\\BMS-Read-Write-1000\\BMS-Read-Write-1000\\Form1.cs",
               "RelativeToolTip": "BMS-Read-Write-1000\\Form1.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAmwHwAAABMAAAAAAAAAA==",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAUwJkAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-11T23:42:02.681Z",
               "EditorCaption": ""

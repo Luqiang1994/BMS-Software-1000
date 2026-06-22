@@ -24,3 +24,14 @@ D:\GitHub_Projects\BMS-Software-1000\BMS-Read-Write-1000\obj\Debug\net7.0-window
 D:\GitHub_Projects\BMS-Software-1000\BMS-Read-Write-1000\obj\Debug\net7.0-windows\ref\BMS-Read-Write-1000.dll
 D:\GitHub_Projects\BMS-Software-1000\BMS-Read-Write-1000\bin\Debug\net7.0-windows\runtimes\unix\lib\net7.0\System.IO.Ports.dll
 D:\GitHub_Projects\BMS-Software-1000\BMS-Read-Write-1000\bin\Debug\net7.0-windows\runtimes\win\lib\net7.0\System.IO.Ports.dll
+D:\GitHubWorkSpace\BMS-Read-Write-1000\BMS-Read-Write-1000\obj\Debug\net7.0-windows\BMS-Read-Write-1000.csproj.AssemblyReference.cache
+D:\GitHubWorkSpace\BMS-Read-Write-1000\BMS-Read-Write-1000\obj\Debug\net7.0-windows\BMS_Read_Write_1000.Form1.resources
+D:\GitHubWorkSpace\BMS-Read-Write-1000\BMS-Read-Write-1000\obj\Debug\net7.0-windows\BMS-Read-Write-1000.csproj.GenerateResource.cache
+D:\GitHubWorkSpace\BMS-Read-Write-1000\BMS-Read-Write-1000\obj\Debug\net7.0-windows\BMS-Read-Write-1000.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHubWorkSpace\BMS-Read-Write-1000\BMS-Read-Write-1000\obj\Debug\net7.0-windows\BMS-Read-Write-1000.AssemblyInfoInputs.cache
+D:\GitHubWorkSpace\BMS-Read-Write-1000\BMS-Read-Write-1000\obj\Debug\net7.0-windows\BMS-Read-Write-1000.AssemblyInfo.cs
+D:\GitHubWorkSpace\BMS-Read-Write-1000\BMS-Read-Write-1000\obj\Debug\net7.0-windows\BMS-Read-Write-1000.csproj.CoreCompileInputs.cache
+D:\GitHubWorkSpace\BMS-Read-Write-1000\BMS-Read-Write-1000\obj\Debug\net7.0-windows\BMS-Read-Write-1000.sourcelink.json
+D:\GitHubWorkSpace\BMS-Read-Write-1000\BMS-Read-Write-1000\obj\Debug\net7.0-windows\BMS-Read-Write-1000.dll
+D:\GitHubWorkSpace\BMS-Read-Write-1000\BMS-Read-Write-1000\obj\Debug\net7.0-windows\refint\BMS-Read-Write-1000.dll
+D:\GitHubWorkSpace\BMS-Read-Write-1000\BMS-Read-Write-1000\obj\Debug\net7.0-windows\BMS-Read-Write-1000.pdb

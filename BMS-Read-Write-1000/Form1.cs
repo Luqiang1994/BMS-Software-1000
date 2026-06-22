@@ -144,7 +144,33 @@ namespace BMS_Read_Write_1000
             lblWarning.Text = data.BmsWarningWord1.ToString();
             lblHardwareVersion.Text = data.HardwareVersion.ToString();
             lblFirmwareVersion.Text = data.FirmwareVersion.ToString();
+            panelOverVoltage.BackColor = IsBitSet(data.BmsWarningWord1, 0) ? Color.Red : Color.Green;
+            panelUnderVoltage.BackColor = IsBitSet(data.BmsWarningWord1, 1) ? Color.Red : Color.Green;
+            panelOverTemp.BackColor = (IsBitSet(data.BmsWarningWord1, 2) || IsBitSet(data.BmsWarningWord1, 4) || IsBitSet(data.BmsWarningWord1, 8)) ? Color.Red : Color.Green;
+            panelUnderTemp.BackColor = (IsBitSet(data.BmsWarningWord1, 3) || IsBitSet(data.BmsWarningWord1, 5)) ? Color.Red : Color.Green;
+            panelOverCurrent.BackColor = (IsBitSet(data.BmsWarningWord1, 6) || IsBitSet(data.BmsWarningWord1, 7)) ? Color.Red : Color.Green;
+            if (data.Current > 0)
+            {
+                panelChargeDischarge.BackColor = Color.Red;
+            }
+            else if (data.Current < 0)
+            {
+                panelChargeDischarge.BackColor = Color.Green;
+            }
+            else
+            {
+                panelChargeDischarge.BackColor = Color.Gray;
+            }
             //labelTemp.Text = $"{data.MaxTemperature / 10.0:F1} °C";
+        }
+
+
+        /// <summary>
+        /// 判断特定位是否为 1
+        /// </summary>
+        public bool IsBitSet(int number, int position)
+        {
+            return (number & (1 << position)) != 0;
         }
 
         private void initDgvStatusInfo()
