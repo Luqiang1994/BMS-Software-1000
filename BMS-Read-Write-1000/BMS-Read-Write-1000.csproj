@@ -14,4 +14,9 @@
     <PackageReference Include="System.IO.Ports" Version="[7.0.0]" />
   </ItemGroup>
 
+  <Target Name="CopyControlCAN" AfterTargets="AfterBuild">
+    <Copy SourceFiles="$(ProjectDir)..\项目资料\C#_Example(VS2019)\WindowsApplication1\bin\x64\Debug\ControlCAN.dll" DestinationFolder="$(OutputPath)x64" Condition="Exists('$(ProjectDir)..\项目资料\C#_Example(VS2019)\WindowsApplication1\bin\x64\Debug\ControlCAN.dll')" />
+    <Copy SourceFiles="$(ProjectDir)..\项目资料\C#_Example(VS2019)\WindowsApplication1\bin\x86\Debug\ControlCAN.dll" DestinationFolder="$(OutputPath)x86" Condition="Exists('$(ProjectDir)..\项目资料\C#_Example(VS2019)\WindowsApplication1\bin\x86\Debug\ControlCAN.dll')" />
+  </Target>
+
 </Project>

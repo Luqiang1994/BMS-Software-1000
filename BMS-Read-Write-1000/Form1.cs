@@ -6,8 +6,10 @@ namespace BMS_Read_Write_1000
     public partial class Form1 : Form
     {
         private readonly BmsDevice _bms = new();
+        private readonly CanDevice _can = new();
         private readonly System.Windows.Forms.Timer _refreshTimer = new();
         private const string voltagedatasName = "电压(mV)";
+        UInt32[] m_arrdevtype = new UInt32[20];
 
         public Form1()
         {
@@ -30,6 +32,30 @@ namespace BMS_Read_Write_1000
 
         private void Form1_Load(object? sender, EventArgs e)
         {
+            #region can初始化
+            comboBox_DevIndex.SelectedIndex = 0;
+            comboBox_CANIndex.SelectedIndex = 0;
+            textBox_AccCode.Text = "00000000";
+            textBox_AccMask.Text = "FFFFFFFF";
+            textBox_Time0.Text = "00";
+            textBox_Time1.Text = "1C";
+            comboBox_Filter.SelectedIndex = 0;              //接收所有类型
+            comboBox_Mode.SelectedIndex = 2;                //还回测试模式
+
+            Int32 curindex = 0;
+            comboBox_devtype.Items.Clear();
+
+            curindex = comboBox_devtype.Items.Add("DEV_USBCAN");
+            m_arrdevtype[curindex] = CanDevice.DEV_USBCAN;
+
+            curindex = comboBox_devtype.Items.Add("DEV_USBCAN2");
+            m_arrdevtype[curindex] = CanDevice.DEV_USBCAN2;
+
+            comboBox_devtype.SelectedIndex = 1;
+            comboBox_devtype.MaxDropDownItems = comboBox_devtype.Items.Count;
+            #endregion
+
+
             foreach (string port in SerialPort.GetPortNames())
                 comboPort.Items.Add(port);
             if (comboPort.Items.Count > 0)
@@ -69,6 +95,74 @@ namespace BMS_Read_Write_1000
             {
                 MessageBox.Show($"连接失败: {ex.Message}", "错误");
             }
+        }
+
+        bool _canConnected;
+
+        public bool ConnectCan(uint devType, uint devIndex, uint canIndex)
+        {
+            if (_canConnected)
+            {
+                _can.Close();
+                _canConnected = false;
+                return false;
+            }
+
+            var config = new VCI_INIT_CONFIG
+            {
+                AccCode = 0x00000000,
+                AccMask = 0xFFFFFFFF,
+                Timing0 = 0x00,
+                Timing1 = 0x1C,
+                Filter = 0,
+                Mode = 0
+            };
+
+            if (!_can.Open(devType, devIndex, canIndex, config))
+            {
+                MessageBox.Show("打开CAN设备失败", "错误");
+                return false;
+            }
+
+            _canConnected = true;
+            _can.DataReceived += OnCanDataReceived;
+            _can.StartCAN();
+            return true;
+        }
+
+        public void DisconnectCan()
+        {
+            if (_canConnected)
+            {
+                _can.DataReceived -= OnCanDataReceived;
+                _can.Close();
+                _canConnected = false;
+            }
+        }
+
+        void OnCanDataReceived(VCI_CAN_OBJ obj)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(() => ProcessCanFrame(obj));
+                return;
+            }
+            ProcessCanFrame(obj);
+        }
+
+        void ProcessCanFrame(VCI_CAN_OBJ obj)
+        {
+            var sb = new System.Text.StringBuilder();
+            sb.Append("CAN: ID=0x").Append(obj.ID.ToString("X"));
+            sb.Append(obj.RemoteFlag == 0 ? " 数据帧" : " 远程帧");
+            sb.Append(obj.ExternFlag == 0 ? " 标准帧" : " 扩展帧");
+            if (obj.RemoteFlag == 0)
+            {
+                sb.Append(" 数据:");
+                for (int i = 0; i < obj.DataLen && i < obj.Data.Length; i++)
+                    sb.Append(' ').Append(obj.Data[i].ToString("X2"));
+            }
+            AppendLog(sb.ToString());
         }
 
         private async void RefreshTimer_Tick(object? sender, EventArgs e)
@@ -125,8 +219,8 @@ namespace BMS_Read_Write_1000
             dgvStatusInfo.Rows[5].Cells[1].Value = data.SingleMinVoltage.ToString();
             dgvStatusInfo.Rows[6].Cells[1].Value = data.SingleMinVoltageNo.ToString();
             //电芯压差和总电压待完善
-            
-            
+
+
             dgvStatusInfo.Rows[9].Cells[1].Value = data.Temperatures[0].ToString();
             dgvStatusInfo.Rows[10].Cells[1].Value = data.Temperatures[1].ToString();
             dgvStatusInfo.Rows[11].Cells[1].Value = data.Temperatures[2].ToString();
@@ -272,21 +366,14 @@ namespace BMS_Read_Write_1000
 
         }
 
-        private static void SetComboValue(ComboBox cb, string value)
+        private static void SetComboValue(TextBox tb, string value)
         {
-            if (cb.Items.Contains(value))
-                cb.SelectedItem = value;
-            else
-            {
-                cb.Items.Clear();
-                cb.Items.Add(value);
-                cb.SelectedIndex = 0;
-            }
+            tb.Text = value;
         }
 
-        private static ushort ParseU16(ComboBox cb)
+        private static ushort ParseU16(TextBox tb)
         {
-            if (ushort.TryParse(cb.Text, out ushort val))
+            if (ushort.TryParse(tb.Text, out ushort val))
                 return val;
             return 0;
         }
@@ -301,6 +388,8 @@ namespace BMS_Read_Write_1000
         {
             if (disposing)
             {
+                DisconnectCan();
+                _can.Dispose();
                 _refreshTimer.Dispose();
                 _bms.Dispose();
             }
@@ -353,6 +442,64 @@ namespace BMS_Read_Write_1000
         {
 
         }
+
+        private void WriteParam(TextBox tb, ushort reg)
+        {
+            BmsRegisters.SlaveAddress = byte.Parse(comboSlaveAddress.Text);
+            ushort val = ParseU16(tb);
+            Task.Run(() =>
+            {
+                if (_bms.WriteSingleRegister(reg, val))
+                    Invoke(() => AppendLog("参数写入成功"));
+                else
+                    Invoke(() => AppendLog("参数写入失败"));
+            });
+        }
+
+        private void BtnOCV_Click(object? sender, EventArgs e) => WriteParam(comboOCV, BmsRegisters.OverVoltageProtectValue);
+        private void BtnOCR_Click(object? sender, EventArgs e) => WriteParam(comboOCR, BmsRegisters.OverVoltageRestoreValue);
+        private void BtnOCDelay_Click(object? sender, EventArgs e) => WriteParam(comboOCDelay, BmsRegisters.OverVoltageProtectDelay);
+        private void BtnUCV_Click(object? sender, EventArgs e) => WriteParam(comboUCV, BmsRegisters.UnderVoltageProtectValue);
+        private void BtnUCR_Click(object? sender, EventArgs e) => WriteParam(comboUCR, BmsRegisters.UnderVoltageRestoreValue);
+        private void BtnUCDelay_Click(object? sender, EventArgs e) => WriteParam(comboUCDelay, BmsRegisters.UnderVoltageProtectDelay);
+        private void BtnCC_Click(object? sender, EventArgs e) => WriteParam(comboCC, BmsRegisters.ChargeOvercurrentValue);
+        private void BtnCCDelay_Click(object? sender, EventArgs e) => WriteParam(comboCCDelay, BmsRegisters.ChargeOvercurrentDelay);
+        private void BtnDC1_Click(object? sender, EventArgs e) => WriteParam(comboDC1, BmsRegisters.DischargeOvercurrentL1);
+        private void BtnDC1Delay_Click(object? sender, EventArgs e) => WriteParam(comboDC1Delay, BmsRegisters.DischargeOvercurrentL1Delay);
+        private void BtnDC2_Click(object? sender, EventArgs e) => WriteParam(comboDC2, BmsRegisters.DischargeOvercurrentL2);
+        private void BtnDC2Delay_Click(object? sender, EventArgs e) => WriteParam(comboDC2Delay, BmsRegisters.DischargeOvercurrentL2Delay);
+        private void BtnBALV_Click(object? sender, EventArgs e) => WriteParam(comboBALV, BmsRegisters.BalanceStartVoltage);
+        private void BtnBALP_Click(object? sender, EventArgs e) => WriteParam(comboBALP, BmsRegisters.BalanceStartPressureDiff);
+        private void BtnSleepLeakageCurrent_Click(object? sender, EventArgs e) => WriteParam(comboSleepLeakageCurrent, BmsRegisters.SleepLeakageCurrent);
+        private void BtnSelfConsumptionPower_Click(object? sender, EventArgs e) => WriteParam(comboSelfConsumptionPower, BmsRegisters.SelfConsumptionPower);
+        private void BtnFunctionParamSet_Click(object? sender, EventArgs e) => WriteParam(comboFunctionParamSet, BmsRegisters.FunctionParameterSet);
+        private void BtnChargeOverTempProtect_Click(object? sender, EventArgs e) => WriteParam(comboChargeOverTempProtect, BmsRegisters.ChargeOvertempProtect);
+        private void BtnChargeOverTempRestore_Click(object? sender, EventArgs e) => WriteParam(comboChargeOverTempRestore, BmsRegisters.ChargeOvertempRestore);
+        private void BtnChargeUnderTempProtect_Click(object? sender, EventArgs e) => WriteParam(comboChargeUnderTempProtect, BmsRegisters.ChargeUndertempProtect);
+        private void BtnChargeUnderTempRestore_Click(object? sender, EventArgs e) => WriteParam(comboChargeUnderTempRestore, BmsRegisters.ChargeUndertempRestore);
+        private void BtnDischargeOverTempProtect_Click(object? sender, EventArgs e) => WriteParam(comboDischargeOverTempProtect, BmsRegisters.DischargeOvertempProtect);
+        private void BtnDischargeOverTempRestore_Click(object? sender, EventArgs e) => WriteParam(comboDischargeOverTempRestore, BmsRegisters.DischargeOvertempRestore);
+        private void BtnDischargeUnderTempProtect_Click(object? sender, EventArgs e) => WriteParam(comboDischargeUnderTempProtect, BmsRegisters.DischargeUndertempProtect);
+        private void BtnDischargeUnderTempRestore_Click(object? sender, EventArgs e) => WriteParam(comboDischargeUnderTempRestore, BmsRegisters.DischargeUndertempRestore);
+        private void BtnMosOverTempProtect_Click(object? sender, EventArgs e) => WriteParam(comboMosOverTempProtect, BmsRegisters.MosOvertempProtect);
+        private void BtnMosOverTempRestore_Click(object? sender, EventArgs e) => WriteParam(comboMosOverTempRestore, BmsRegisters.MosOvertempRestore);
+        private void BtnChargeCorrection_Click(object? sender, EventArgs e) => WriteParam(comboChargeCorrection, BmsRegisters.ChargingCorrection);
+        private void BtnDischargeCorrection_Click(object? sender, EventArgs e) => WriteParam(comboDischargeCorrection, BmsRegisters.DischargingCorrection);
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConnect_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
-    
+
 }

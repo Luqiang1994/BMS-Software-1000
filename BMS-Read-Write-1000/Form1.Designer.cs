@@ -8,6 +8,27 @@ namespace BMS_Read_Write_1000
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            groupBox6 = new GroupBox();
+            button_StopCAN = new Button();
+            button_StartCAN = new Button();
+            comboBox_Mode = new ComboBox();
+            comboBox_Filter = new ComboBox();
+            textBox_Time1 = new TextBox();
+            textBox_Time0 = new TextBox();
+            textBox_AccMask = new TextBox();
+            textBox_AccCode = new TextBox();
+            comboBox_CANIndex = new ComboBox();
+            comboBox_DevIndex = new ComboBox();
+            label37 = new Label();
+            label44 = new Label();
+            label42 = new Label();
+            label43 = new Label();
+            label40 = new Label();
+            label41 = new Label();
+            label39 = new Label();
+            label35 = new Label();
+            comboBox_devtype = new ComboBox();
+            label22 = new Label();
             dgvStatusInfo = new DataGridView();
             cm_Name1 = new DataGridViewTextBoxColumn();
             cm_Value1 = new DataGridViewTextBoxColumn();
@@ -54,69 +75,98 @@ namespace BMS_Read_Write_1000
             label59 = new Label();
             groupBox13 = new GroupBox();
             label58 = new Label();
-            comboDischargeCorrection = new ComboBox();
+            comboDischargeCorrection = new TextBox();
             label57 = new Label();
-            comboChargeCorrection = new ComboBox();
+            comboChargeCorrection = new TextBox();
+            btnChargeCorrection = new Button();
+            btnDischargeCorrection = new Button();
             groupBox12 = new GroupBox();
             label56 = new Label();
-            comboMosOverTempProtect = new ComboBox();
-            comboMosOverTempRestore = new ComboBox();
+            comboMosOverTempProtect = new TextBox();
+            comboMosOverTempRestore = new TextBox();
             label55 = new Label();
+            btnMosOverTempProtect = new Button();
+            btnMosOverTempRestore = new Button();
             groupBox11 = new GroupBox();
             label11 = new Label();
             label10 = new Label();
             label12 = new Label();
             label13 = new Label();
-            comboDischargeUnderTempRestore = new ComboBox();
-            comboDischargeUnderTempProtect = new ComboBox();
-            comboDischargeOverTempRestore = new ComboBox();
-            comboDischargeOverTempProtect = new ComboBox();
-            comboChargeUnderTempRestore = new ComboBox();
-            comboChargeUnderTempProtect = new ComboBox();
-            comboChargeOverTempRestore = new ComboBox();
-            comboChargeOverTempProtect = new ComboBox();
+            comboDischargeUnderTempRestore = new TextBox();
+            comboDischargeUnderTempProtect = new TextBox();
+            comboDischargeOverTempRestore = new TextBox();
+            comboDischargeOverTempProtect = new TextBox();
+            comboChargeUnderTempRestore = new TextBox();
+            comboChargeUnderTempProtect = new TextBox();
+            comboChargeOverTempRestore = new TextBox();
+            comboChargeOverTempProtect = new TextBox();
             label51 = new Label();
             label54 = new Label();
+            BtnChargeOverTempProtect = new Button();
+            BtnChargeOverTempRestore = new Button();
+            btnDischargeOverTempProtect = new Button();
+            BtnChargeUnderTempProtect = new Button();
+            btnDischargeOverTempRestore = new Button();
+            BtnChargeUnderTempRestore = new Button();
+            btnDischargeUnderTempProtect = new Button();
+            btnDischargeUnderTempRestore = new Button();
             groupBox10 = new GroupBox();
-            comboFunctionParamSet = new ComboBox();
+            comboFunctionParamSet = new TextBox();
             label9 = new Label();
-            comboSelfConsumptionPower = new ComboBox();
+            comboSelfConsumptionPower = new TextBox();
             label8 = new Label();
-            comboSleepLeakageCurrent = new ComboBox();
+            comboSleepLeakageCurrent = new TextBox();
             label7 = new Label();
+            btnSleepLeakageCurrent = new Button();
+            btnSelfConsumptionPower = new Button();
+            btnFunctionParamSet = new Button();
             groupBox9 = new GroupBox();
             label53 = new Label();
-            comboBALP = new ComboBox();
+            comboBALP = new TextBox();
             label52 = new Label();
-            comboBALV = new ComboBox();
+            comboBALV = new TextBox();
+            btnBALV = new Button();
+            btnBALP = new Button();
             groupBox3 = new GroupBox();
-            comboDC2Delay = new ComboBox();
-            comboDC2 = new ComboBox();
-            comboDC1Delay = new ComboBox();
-            comboDC1 = new ComboBox();
-            comboCCDelay = new ComboBox();
-            comboCC = new ComboBox();
+            comboDC2Delay = new TextBox();
+            comboDC2 = new TextBox();
+            comboDC1Delay = new TextBox();
+            comboDC1 = new TextBox();
+            comboCCDelay = new TextBox();
+            comboCC = new TextBox();
             label19 = new Label();
             label18 = new Label();
             label17 = new Label();
             label16 = new Label();
             label15 = new Label();
             label14 = new Label();
+            btnCC = new Button();
+            btnCCDelay = new Button();
+            btnDC1 = new Button();
+            btnDC1Delay = new Button();
+            btnDC2 = new Button();
+            btnDC2Delay = new Button();
             groupBox2 = new GroupBox();
-            comboUCDelay = new ComboBox();
-            comboUCR = new ComboBox();
-            comboUCV = new ComboBox();
+            comboUCDelay = new TextBox();
+            comboUCR = new TextBox();
+            comboUCV = new TextBox();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
+            btnUCV = new Button();
+            btnUCR = new Button();
+            btnUCDelay = new Button();
             groupBox1 = new GroupBox();
-            comboOCDelay = new ComboBox();
-            comboOCR = new ComboBox();
-            comboOCV = new ComboBox();
+            comboOCDelay = new TextBox();
+            comboOCR = new TextBox();
+            comboOCV = new TextBox();
             label2 = new Label();
             label1 = new Label();
             label26 = new Label();
+            btnOCV = new Button();
+            btnOCR = new Button();
+            btnOCDelay = new Button();
             groupBox4 = new GroupBox();
             lblFirmwareVersion = new Label();
             lblHardwareVersion = new Label();
@@ -145,6 +195,7 @@ namespace BMS_Read_Write_1000
             progressBarSoc = new ProgressBar();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvStatusInfo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCellVoltages).BeginInit();
             groupBox17.SuspendLayout();
@@ -171,11 +222,12 @@ namespace BMS_Read_Write_1000
             tabControl1.Location = new Point(3, 2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(711, 582);
+            tabControl1.Size = new Size(797, 582);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(groupBox6);
             tabPage1.Controls.Add(dgvStatusInfo);
             tabPage1.Controls.Add(dgvCellVoltages);
             tabPage1.Controls.Add(groupBox17);
@@ -184,16 +236,221 @@ namespace BMS_Read_Write_1000
             tabPage1.Location = new Point(4, 26);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(703, 552);
+            tabPage1.Size = new Size(789, 552);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "实时监控";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox6
+            // 
+            groupBox6.Controls.Add(button_StopCAN);
+            groupBox6.Controls.Add(button_StartCAN);
+            groupBox6.Controls.Add(comboBox_Mode);
+            groupBox6.Controls.Add(comboBox_Filter);
+            groupBox6.Controls.Add(textBox_Time1);
+            groupBox6.Controls.Add(textBox_Time0);
+            groupBox6.Controls.Add(textBox_AccMask);
+            groupBox6.Controls.Add(textBox_AccCode);
+            groupBox6.Controls.Add(comboBox_CANIndex);
+            groupBox6.Controls.Add(comboBox_DevIndex);
+            groupBox6.Controls.Add(label37);
+            groupBox6.Controls.Add(label44);
+            groupBox6.Controls.Add(label42);
+            groupBox6.Controls.Add(label43);
+            groupBox6.Controls.Add(label40);
+            groupBox6.Controls.Add(label41);
+            groupBox6.Controls.Add(label39);
+            groupBox6.Controls.Add(label35);
+            groupBox6.Controls.Add(comboBox_devtype);
+            groupBox6.Controls.Add(label22);
+            groupBox6.Location = new Point(6, 158);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new Size(281, 207);
+            groupBox6.TabIndex = 13;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Can盒设置";
+            // 
+            // button_StopCAN
+            // 
+            button_StopCAN.Location = new Point(167, 174);
+            button_StopCAN.Name = "button_StopCAN";
+            button_StopCAN.Size = new Size(75, 23);
+            button_StopCAN.TabIndex = 7;
+            button_StopCAN.Text = "关闭";
+            button_StopCAN.UseVisualStyleBackColor = true;
+            // 
+            // button_StartCAN
+            // 
+            button_StartCAN.Location = new Point(31, 174);
+            button_StartCAN.Name = "button_StartCAN";
+            button_StartCAN.Size = new Size(75, 23);
+            button_StartCAN.TabIndex = 7;
+            button_StartCAN.Text = "连接";
+            button_StartCAN.UseVisualStyleBackColor = true;
+            // 
+            // comboBox_Mode
+            // 
+            comboBox_Mode.FormattingEnabled = true;
+            comboBox_Mode.Items.AddRange(new object[] { "正常", "只听", "自测" });
+            comboBox_Mode.Location = new Point(196, 126);
+            comboBox_Mode.Name = "comboBox_Mode";
+            comboBox_Mode.Size = new Size(70, 25);
+            comboBox_Mode.TabIndex = 6;
+            // 
+            // comboBox_Filter
+            // 
+            comboBox_Filter.FormattingEnabled = true;
+            comboBox_Filter.Items.AddRange(new object[] { "接收全部类型", "只接收标准帧", "只接收扩展帧" });
+            comboBox_Filter.Location = new Point(72, 129);
+            comboBox_Filter.Name = "comboBox_Filter";
+            comboBox_Filter.Size = new Size(77, 25);
+            comboBox_Filter.TabIndex = 6;
+            // 
+            // textBox_Time1
+            // 
+            textBox_Time1.Location = new Point(228, 100);
+            textBox_Time1.Name = "textBox_Time1";
+            textBox_Time1.Size = new Size(38, 23);
+            textBox_Time1.TabIndex = 5;
+            textBox_Time1.Text = "1C";
+            // 
+            // textBox_Time0
+            // 
+            textBox_Time0.Location = new Point(228, 75);
+            textBox_Time0.Name = "textBox_Time0";
+            textBox_Time0.Size = new Size(38, 23);
+            textBox_Time0.TabIndex = 5;
+            textBox_Time0.Text = "00";
+            // 
+            // textBox_AccMask
+            // 
+            textBox_AccMask.Location = new Point(72, 100);
+            textBox_AccMask.Name = "textBox_AccMask";
+            textBox_AccMask.Size = new Size(63, 23);
+            textBox_AccMask.TabIndex = 4;
+            textBox_AccMask.Text = "FFFFFFFF";
+            // 
+            // textBox_AccCode
+            // 
+            textBox_AccCode.Location = new Point(72, 75);
+            textBox_AccCode.Name = "textBox_AccCode";
+            textBox_AccCode.Size = new Size(63, 23);
+            textBox_AccCode.TabIndex = 4;
+            textBox_AccCode.Text = "00000000";
+            // 
+            // comboBox_CANIndex
+            // 
+            comboBox_CANIndex.FormattingEnabled = true;
+            comboBox_CANIndex.Items.AddRange(new object[] { "0", "1" });
+            comboBox_CANIndex.Location = new Point(214, 44);
+            comboBox_CANIndex.Name = "comboBox_CANIndex";
+            comboBox_CANIndex.Size = new Size(41, 25);
+            comboBox_CANIndex.TabIndex = 3;
+            // 
+            // comboBox_DevIndex
+            // 
+            comboBox_DevIndex.FormattingEnabled = true;
+            comboBox_DevIndex.Items.AddRange(new object[] { "0", "1", "2", "3" });
+            comboBox_DevIndex.Location = new Point(72, 44);
+            comboBox_DevIndex.Name = "comboBox_DevIndex";
+            comboBox_DevIndex.Size = new Size(49, 25);
+            comboBox_DevIndex.TabIndex = 3;
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Location = new Point(155, 52);
+            label37.Name = "label37";
+            label37.Size = new Size(57, 17);
+            label37.TabIndex = 2;
+            label37.Text = "Can路数:";
+            // 
+            // label44
+            // 
+            label44.AutoSize = true;
+            label44.Location = new Point(155, 134);
+            label44.Name = "label44";
+            label44.Size = new Size(35, 17);
+            label44.TabIndex = 2;
+            label44.Text = "模式:";
+            // 
+            // label42
+            // 
+            label42.AutoSize = true;
+            label42.Location = new Point(155, 103);
+            label42.Name = "label42";
+            label42.Size = new Size(67, 17);
+            label42.TabIndex = 2;
+            label42.Text = "定时器1:0x";
+            // 
+            // label43
+            // 
+            label43.AutoSize = true;
+            label43.Location = new Point(6, 138);
+            label43.Name = "label43";
+            label43.Size = new Size(59, 17);
+            label43.TabIndex = 2;
+            label43.Text = "滤波方式:";
+            // 
+            // label40
+            // 
+            label40.AutoSize = true;
+            label40.Location = new Point(6, 107);
+            label40.Name = "label40";
+            label40.Size = new Size(60, 17);
+            label40.TabIndex = 2;
+            label40.Text = "屏蔽码:0x";
+            // 
+            // label41
+            // 
+            label41.AutoSize = true;
+            label41.Location = new Point(155, 78);
+            label41.Name = "label41";
+            label41.Size = new Size(67, 17);
+            label41.TabIndex = 2;
+            label41.Text = "定时器0:0x";
+            // 
+            // label39
+            // 
+            label39.AutoSize = true;
+            label39.Location = new Point(6, 82);
+            label39.Name = "label39";
+            label39.Size = new Size(60, 17);
+            label39.TabIndex = 2;
+            label39.Text = "验收码:0x";
+            // 
+            // label35
+            // 
+            label35.AutoSize = true;
+            label35.Location = new Point(6, 52);
+            label35.Name = "label35";
+            label35.Size = new Size(47, 17);
+            label35.TabIndex = 2;
+            label35.Text = "索引号:";
+            // 
+            // comboBox_devtype
+            // 
+            comboBox_devtype.FormattingEnabled = true;
+            comboBox_devtype.Items.AddRange(new object[] { "3", "4" });
+            comboBox_devtype.Location = new Point(72, 16);
+            comboBox_devtype.Name = "comboBox_devtype";
+            comboBox_devtype.Size = new Size(183, 25);
+            comboBox_devtype.TabIndex = 1;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new Point(6, 19);
+            label22.Name = "label22";
+            label22.Size = new Size(35, 17);
+            label22.TabIndex = 0;
+            label22.Text = "类型:";
             // 
             // dgvStatusInfo
             // 
             dgvStatusInfo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvStatusInfo.Columns.AddRange(new DataGridViewColumn[] { cm_Name1, cm_Value1 });
-            dgvStatusInfo.Location = new Point(492, 7);
+            dgvStatusInfo.Location = new Point(547, 7);
             dgvStatusInfo.Name = "dgvStatusInfo";
             dgvStatusInfo.RowHeadersVisible = false;
             dgvStatusInfo.Size = new Size(205, 537);
@@ -213,7 +470,7 @@ namespace BMS_Read_Write_1000
             // 
             dgvCellVoltages.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCellVoltages.Columns.AddRange(new DataGridViewColumn[] { colBalance, cm_Name, cm_Value });
-            dgvCellVoltages.Location = new Point(238, 6);
+            dgvCellVoltages.Location = new Point(293, 6);
             dgvCellVoltages.Name = "dgvCellVoltages";
             dgvCellVoltages.RowHeadersVisible = false;
             dgvCellVoltages.Size = new Size(248, 538);
@@ -245,9 +502,9 @@ namespace BMS_Read_Write_1000
             groupBox17.Controls.Add(label61);
             groupBox17.Controls.Add(label21);
             groupBox17.Controls.Add(label24);
-            groupBox17.Location = new Point(6, 212);
+            groupBox17.Location = new Point(6, 425);
             groupBox17.Name = "groupBox17";
-            groupBox17.Size = new Size(226, 123);
+            groupBox17.Size = new Size(281, 123);
             groupBox17.TabIndex = 10;
             groupBox17.TabStop = false;
             groupBox17.Text = "电池信息";
@@ -325,9 +582,9 @@ namespace BMS_Read_Write_1000
             groupBox16.Controls.Add(comboSlaveAddress);
             groupBox16.Controls.Add(btn_StopMonitoring);
             groupBox16.Controls.Add(label60);
-            groupBox16.Location = new Point(6, 158);
+            groupBox16.Location = new Point(6, 371);
             groupBox16.Name = "groupBox16";
-            groupBox16.Size = new Size(226, 48);
+            groupBox16.Size = new Size(281, 48);
             groupBox16.TabIndex = 9;
             groupBox16.TabStop = false;
             groupBox16.Text = "地址选择";
@@ -369,7 +626,7 @@ namespace BMS_Read_Write_1000
             groupBox5.Controls.Add(label);
             groupBox5.Location = new Point(6, 6);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(226, 146);
+            groupBox5.Size = new Size(281, 146);
             groupBox5.TabIndex = 8;
             groupBox5.TabStop = false;
             groupBox5.Text = "串口设置";
@@ -391,6 +648,7 @@ namespace BMS_Read_Write_1000
             btnConnect.TabIndex = 4;
             btnConnect.Text = "搜索设备";
             btnConnect.UseVisualStyleBackColor = true;
+            btnConnect.Click += BtnConnect_Click;
             // 
             // comboBaud
             // 
@@ -445,7 +703,7 @@ namespace BMS_Read_Write_1000
             tabPage2.Location = new Point(4, 26);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(703, 552);
+            tabPage2.Size = new Size(789, 552);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "参数配置";
             tabPage2.UseVisualStyleBackColor = true;
@@ -479,7 +737,7 @@ namespace BMS_Read_Write_1000
             groupBox15.Controls.Add(btn_ExitManulMode);
             groupBox15.Controls.Add(btn_ChargeOnDischargeOn);
             groupBox15.Controls.Add(btn_ChargeOnDischargeOff);
-            groupBox15.Location = new Point(455, 292);
+            groupBox15.Location = new Point(566, 292);
             groupBox15.Name = "groupBox15";
             groupBox15.Size = new Size(216, 151);
             groupBox15.TabIndex = 17;
@@ -563,7 +821,7 @@ namespace BMS_Read_Write_1000
             groupBox14.Controls.Add(richTextBox1);
             groupBox14.Controls.Add(comboFwBaudRate);
             groupBox14.Controls.Add(label59);
-            groupBox14.Location = new Point(455, 96);
+            groupBox14.Location = new Point(566, 96);
             groupBox14.Name = "groupBox14";
             groupBox14.Size = new Size(216, 190);
             groupBox14.TabIndex = 16;
@@ -622,9 +880,11 @@ namespace BMS_Read_Write_1000
             groupBox13.Controls.Add(comboDischargeCorrection);
             groupBox13.Controls.Add(label57);
             groupBox13.Controls.Add(comboChargeCorrection);
-            groupBox13.Location = new Point(455, 6);
+            groupBox13.Controls.Add(btnChargeCorrection);
+            groupBox13.Controls.Add(btnDischargeCorrection);
+            groupBox13.Location = new Point(530, 6);
             groupBox13.Name = "groupBox13";
-            groupBox13.Size = new Size(216, 84);
+            groupBox13.Size = new Size(252, 84);
             groupBox13.TabIndex = 15;
             groupBox13.TabStop = false;
             groupBox13.Text = "电流校正";
@@ -640,10 +900,9 @@ namespace BMS_Read_Write_1000
             // 
             // comboDischargeCorrection
             // 
-            comboDischargeCorrection.FormattingEnabled = true;
-            comboDischargeCorrection.Location = new Point(131, 51);
+            comboDischargeCorrection.Location = new Point(105, 51);
             comboDischargeCorrection.Name = "comboDischargeCorrection";
-            comboDischargeCorrection.Size = new Size(79, 25);
+            comboDischargeCorrection.Size = new Size(79, 23);
             comboDischargeCorrection.TabIndex = 2;
             // 
             // label57
@@ -657,11 +916,30 @@ namespace BMS_Read_Write_1000
             // 
             // comboChargeCorrection
             // 
-            comboChargeCorrection.FormattingEnabled = true;
-            comboChargeCorrection.Location = new Point(131, 20);
+            comboChargeCorrection.Location = new Point(105, 20);
             comboChargeCorrection.Name = "comboChargeCorrection";
-            comboChargeCorrection.Size = new Size(79, 25);
+            comboChargeCorrection.Size = new Size(79, 23);
             comboChargeCorrection.TabIndex = 2;
+            // 
+            // btnChargeCorrection
+            // 
+            btnChargeCorrection.Location = new Point(190, 20);
+            btnChargeCorrection.Name = "btnChargeCorrection";
+            btnChargeCorrection.Size = new Size(52, 23);
+            btnChargeCorrection.TabIndex = 1;
+            btnChargeCorrection.Text = "确定";
+            btnChargeCorrection.UseVisualStyleBackColor = true;
+            btnChargeCorrection.Click += BtnChargeCorrection_Click;
+            // 
+            // btnDischargeCorrection
+            // 
+            btnDischargeCorrection.Location = new Point(190, 51);
+            btnDischargeCorrection.Name = "btnDischargeCorrection";
+            btnDischargeCorrection.Size = new Size(52, 23);
+            btnDischargeCorrection.TabIndex = 1;
+            btnDischargeCorrection.Text = "确定";
+            btnDischargeCorrection.UseVisualStyleBackColor = true;
+            btnDischargeCorrection.Click += BtnDischargeCorrection_Click;
             // 
             // groupBox12
             // 
@@ -669,9 +947,11 @@ namespace BMS_Read_Write_1000
             groupBox12.Controls.Add(comboMosOverTempProtect);
             groupBox12.Controls.Add(comboMosOverTempRestore);
             groupBox12.Controls.Add(label55);
-            groupBox12.Location = new Point(223, 357);
+            groupBox12.Controls.Add(btnMosOverTempProtect);
+            groupBox12.Controls.Add(btnMosOverTempRestore);
+            groupBox12.Location = new Point(255, 357);
             groupBox12.Name = "groupBox12";
-            groupBox12.Size = new Size(226, 86);
+            groupBox12.Size = new Size(256, 86);
             groupBox12.TabIndex = 14;
             groupBox12.TabStop = false;
             groupBox12.Text = "MOS超温";
@@ -688,19 +968,17 @@ namespace BMS_Read_Write_1000
             // comboMosOverTempProtect
             // 
             comboMosOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            comboMosOverTempProtect.FormattingEnabled = true;
             comboMosOverTempProtect.Location = new Point(120, 18);
             comboMosOverTempProtect.Name = "comboMosOverTempProtect";
-            comboMosOverTempProtect.Size = new Size(94, 22);
+            comboMosOverTempProtect.Size = new Size(74, 19);
             comboMosOverTempProtect.TabIndex = 1;
             // 
             // comboMosOverTempRestore
             // 
             comboMosOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            comboMosOverTempRestore.FormattingEnabled = true;
             comboMosOverTempRestore.Location = new Point(120, 42);
             comboMosOverTempRestore.Name = "comboMosOverTempRestore";
-            comboMosOverTempRestore.Size = new Size(94, 22);
+            comboMosOverTempRestore.Size = new Size(74, 19);
             comboMosOverTempRestore.TabIndex = 1;
             // 
             // label55
@@ -711,6 +989,26 @@ namespace BMS_Read_Write_1000
             label55.Size = new Size(108, 17);
             label55.TabIndex = 9;
             label55.Text = "MOS超温恢复(℃):";
+            // 
+            // btnMosOverTempProtect
+            // 
+            btnMosOverTempProtect.Location = new Point(202, 18);
+            btnMosOverTempProtect.Name = "btnMosOverTempProtect";
+            btnMosOverTempProtect.Size = new Size(44, 23);
+            btnMosOverTempProtect.TabIndex = 1;
+            btnMosOverTempProtect.Text = "确定";
+            btnMosOverTempProtect.UseVisualStyleBackColor = true;
+            btnMosOverTempProtect.Click += BtnMosOverTempProtect_Click;
+            // 
+            // btnMosOverTempRestore
+            // 
+            btnMosOverTempRestore.Location = new Point(202, 42);
+            btnMosOverTempRestore.Name = "btnMosOverTempRestore";
+            btnMosOverTempRestore.Size = new Size(44, 23);
+            btnMosOverTempRestore.TabIndex = 1;
+            btnMosOverTempRestore.Text = "确定";
+            btnMosOverTempRestore.UseVisualStyleBackColor = true;
+            btnMosOverTempRestore.Click += BtnMosOverTempRestore_Click;
             // 
             // groupBox11
             // 
@@ -728,9 +1026,17 @@ namespace BMS_Read_Write_1000
             groupBox11.Controls.Add(comboChargeOverTempProtect);
             groupBox11.Controls.Add(label51);
             groupBox11.Controls.Add(label54);
-            groupBox11.Location = new Point(223, 210);
+            groupBox11.Controls.Add(BtnChargeOverTempProtect);
+            groupBox11.Controls.Add(BtnChargeOverTempRestore);
+            groupBox11.Controls.Add(btnDischargeOverTempProtect);
+            groupBox11.Controls.Add(BtnChargeUnderTempProtect);
+            groupBox11.Controls.Add(btnDischargeOverTempRestore);
+            groupBox11.Controls.Add(BtnChargeUnderTempRestore);
+            groupBox11.Controls.Add(btnDischargeUnderTempProtect);
+            groupBox11.Controls.Add(btnDischargeUnderTempRestore);
+            groupBox11.Location = new Point(255, 210);
             groupBox11.Name = "groupBox11";
-            groupBox11.Size = new Size(226, 141);
+            groupBox11.Size = new Size(305, 141);
             groupBox11.TabIndex = 13;
             groupBox11.TabStop = false;
             groupBox11.Text = "温度保护";
@@ -738,7 +1044,7 @@ namespace BMS_Read_Write_1000
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(164, 19);
+            label11.Location = new Point(214, 19);
             label11.Name = "label11";
             label11.Size = new Size(32, 17);
             label11.TabIndex = 0;
@@ -774,73 +1080,65 @@ namespace BMS_Read_Write_1000
             // comboDischargeUnderTempRestore
             // 
             comboDischargeUnderTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            comboDischargeUnderTempRestore.FormattingEnabled = true;
-            comboDischargeUnderTempRestore.Location = new Point(151, 112);
+            comboDischargeUnderTempRestore.Location = new Point(201, 112);
             comboDischargeUnderTempRestore.Name = "comboDischargeUnderTempRestore";
-            comboDischargeUnderTempRestore.Size = new Size(56, 22);
+            comboDischargeUnderTempRestore.Size = new Size(56, 19);
             comboDischargeUnderTempRestore.TabIndex = 1;
             // 
             // comboDischargeUnderTempProtect
             // 
             comboDischargeUnderTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            comboDischargeUnderTempProtect.FormattingEnabled = true;
-            comboDischargeUnderTempProtect.Location = new Point(151, 87);
+            comboDischargeUnderTempProtect.Location = new Point(201, 87);
             comboDischargeUnderTempProtect.Name = "comboDischargeUnderTempProtect";
-            comboDischargeUnderTempProtect.Size = new Size(56, 22);
+            comboDischargeUnderTempProtect.Size = new Size(56, 19);
             comboDischargeUnderTempProtect.TabIndex = 1;
             // 
             // comboDischargeOverTempRestore
             // 
             comboDischargeOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            comboDischargeOverTempRestore.FormattingEnabled = true;
-            comboDischargeOverTempRestore.Location = new Point(151, 63);
+            comboDischargeOverTempRestore.Location = new Point(201, 63);
             comboDischargeOverTempRestore.Name = "comboDischargeOverTempRestore";
-            comboDischargeOverTempRestore.Size = new Size(56, 22);
+            comboDischargeOverTempRestore.Size = new Size(56, 19);
             comboDischargeOverTempRestore.TabIndex = 1;
             // 
             // comboDischargeOverTempProtect
             // 
             comboDischargeOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            comboDischargeOverTempProtect.FormattingEnabled = true;
-            comboDischargeOverTempProtect.Location = new Point(151, 39);
+            comboDischargeOverTempProtect.Location = new Point(201, 39);
             comboDischargeOverTempProtect.Name = "comboDischargeOverTempProtect";
-            comboDischargeOverTempProtect.Size = new Size(56, 22);
+            comboDischargeOverTempProtect.Size = new Size(56, 19);
             comboDischargeOverTempProtect.TabIndex = 1;
             // 
             // comboChargeUnderTempRestore
             // 
             comboChargeUnderTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            comboChargeUnderTempRestore.FormattingEnabled = true;
             comboChargeUnderTempRestore.Location = new Point(89, 112);
             comboChargeUnderTempRestore.Name = "comboChargeUnderTempRestore";
-            comboChargeUnderTempRestore.Size = new Size(56, 22);
+            comboChargeUnderTempRestore.Size = new Size(56, 19);
             comboChargeUnderTempRestore.TabIndex = 1;
             // 
             // comboChargeUnderTempProtect
             // 
             comboChargeUnderTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            comboChargeUnderTempProtect.FormattingEnabled = true;
             comboChargeUnderTempProtect.Location = new Point(89, 87);
             comboChargeUnderTempProtect.Name = "comboChargeUnderTempProtect";
-            comboChargeUnderTempProtect.Size = new Size(56, 22);
+            comboChargeUnderTempProtect.Size = new Size(56, 19);
             comboChargeUnderTempProtect.TabIndex = 1;
             // 
             // comboChargeOverTempRestore
             // 
             comboChargeOverTempRestore.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            comboChargeOverTempRestore.FormattingEnabled = true;
             comboChargeOverTempRestore.Location = new Point(89, 63);
             comboChargeOverTempRestore.Name = "comboChargeOverTempRestore";
-            comboChargeOverTempRestore.Size = new Size(56, 22);
+            comboChargeOverTempRestore.Size = new Size(56, 19);
             comboChargeOverTempRestore.TabIndex = 1;
             // 
             // comboChargeOverTempProtect
             // 
             comboChargeOverTempProtect.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            comboChargeOverTempProtect.FormattingEnabled = true;
             comboChargeOverTempProtect.Location = new Point(89, 39);
             comboChargeOverTempProtect.Name = "comboChargeOverTempProtect";
-            comboChargeOverTempProtect.Size = new Size(56, 22);
+            comboChargeOverTempProtect.Size = new Size(56, 19);
             comboChargeOverTempProtect.TabIndex = 1;
             // 
             // label51
@@ -861,6 +1159,86 @@ namespace BMS_Read_Write_1000
             label54.TabIndex = 5;
             label54.Text = "低温恢复(℃):";
             // 
+            // BtnChargeOverTempProtect
+            // 
+            BtnChargeOverTempProtect.Location = new Point(151, 37);
+            BtnChargeOverTempProtect.Name = "BtnChargeOverTempProtect";
+            BtnChargeOverTempProtect.Size = new Size(41, 23);
+            BtnChargeOverTempProtect.TabIndex = 1;
+            BtnChargeOverTempProtect.Text = "确定";
+            BtnChargeOverTempProtect.UseVisualStyleBackColor = true;
+            BtnChargeOverTempProtect.Click += BtnChargeOverTempProtect_Click;
+            // 
+            // BtnChargeOverTempRestore
+            // 
+            BtnChargeOverTempRestore.Location = new Point(151, 61);
+            BtnChargeOverTempRestore.Name = "BtnChargeOverTempRestore";
+            BtnChargeOverTempRestore.Size = new Size(41, 23);
+            BtnChargeOverTempRestore.TabIndex = 1;
+            BtnChargeOverTempRestore.Text = "确定";
+            BtnChargeOverTempRestore.UseVisualStyleBackColor = true;
+            BtnChargeOverTempRestore.Click += BtnChargeOverTempRestore_Click;
+            // 
+            // btnDischargeOverTempProtect
+            // 
+            btnDischargeOverTempProtect.Location = new Point(259, 39);
+            btnDischargeOverTempProtect.Name = "btnDischargeOverTempProtect";
+            btnDischargeOverTempProtect.Size = new Size(41, 23);
+            btnDischargeOverTempProtect.TabIndex = 1;
+            btnDischargeOverTempProtect.Text = "确定";
+            btnDischargeOverTempProtect.UseVisualStyleBackColor = true;
+            btnDischargeOverTempProtect.Click += BtnDischargeOverTempProtect_Click;
+            // 
+            // BtnChargeUnderTempProtect
+            // 
+            BtnChargeUnderTempProtect.Location = new Point(151, 85);
+            BtnChargeUnderTempProtect.Name = "BtnChargeUnderTempProtect";
+            BtnChargeUnderTempProtect.Size = new Size(41, 23);
+            BtnChargeUnderTempProtect.TabIndex = 1;
+            BtnChargeUnderTempProtect.Text = "确定";
+            BtnChargeUnderTempProtect.UseVisualStyleBackColor = true;
+            BtnChargeUnderTempProtect.Click += BtnChargeUnderTempProtect_Click;
+            // 
+            // btnDischargeOverTempRestore
+            // 
+            btnDischargeOverTempRestore.Location = new Point(259, 63);
+            btnDischargeOverTempRestore.Name = "btnDischargeOverTempRestore";
+            btnDischargeOverTempRestore.Size = new Size(41, 23);
+            btnDischargeOverTempRestore.TabIndex = 1;
+            btnDischargeOverTempRestore.Text = "确定";
+            btnDischargeOverTempRestore.UseVisualStyleBackColor = true;
+            btnDischargeOverTempRestore.Click += BtnDischargeOverTempRestore_Click;
+            // 
+            // BtnChargeUnderTempRestore
+            // 
+            BtnChargeUnderTempRestore.Location = new Point(151, 110);
+            BtnChargeUnderTempRestore.Name = "BtnChargeUnderTempRestore";
+            BtnChargeUnderTempRestore.Size = new Size(41, 23);
+            BtnChargeUnderTempRestore.TabIndex = 1;
+            BtnChargeUnderTempRestore.Text = "确定";
+            BtnChargeUnderTempRestore.UseVisualStyleBackColor = true;
+            BtnChargeUnderTempRestore.Click += BtnChargeUnderTempRestore_Click;
+            // 
+            // btnDischargeUnderTempProtect
+            // 
+            btnDischargeUnderTempProtect.Location = new Point(259, 87);
+            btnDischargeUnderTempProtect.Name = "btnDischargeUnderTempProtect";
+            btnDischargeUnderTempProtect.Size = new Size(41, 23);
+            btnDischargeUnderTempProtect.TabIndex = 1;
+            btnDischargeUnderTempProtect.Text = "确定";
+            btnDischargeUnderTempProtect.UseVisualStyleBackColor = true;
+            btnDischargeUnderTempProtect.Click += BtnDischargeUnderTempProtect_Click;
+            // 
+            // btnDischargeUnderTempRestore
+            // 
+            btnDischargeUnderTempRestore.Location = new Point(259, 112);
+            btnDischargeUnderTempRestore.Name = "btnDischargeUnderTempRestore";
+            btnDischargeUnderTempRestore.Size = new Size(41, 23);
+            btnDischargeUnderTempRestore.TabIndex = 1;
+            btnDischargeUnderTempRestore.Text = "确定";
+            btnDischargeUnderTempRestore.UseVisualStyleBackColor = true;
+            btnDischargeUnderTempRestore.Click += BtnDischargeUnderTempRestore_Click;
+            // 
             // groupBox10
             // 
             groupBox10.Controls.Add(comboFunctionParamSet);
@@ -869,19 +1247,21 @@ namespace BMS_Read_Write_1000
             groupBox10.Controls.Add(label8);
             groupBox10.Controls.Add(comboSleepLeakageCurrent);
             groupBox10.Controls.Add(label7);
-            groupBox10.Location = new Point(223, 96);
+            groupBox10.Controls.Add(btnSleepLeakageCurrent);
+            groupBox10.Controls.Add(btnSelfConsumptionPower);
+            groupBox10.Controls.Add(btnFunctionParamSet);
+            groupBox10.Location = new Point(255, 96);
             groupBox10.Name = "groupBox10";
-            groupBox10.Size = new Size(226, 108);
+            groupBox10.Size = new Size(256, 108);
             groupBox10.TabIndex = 12;
             groupBox10.TabStop = false;
             groupBox10.Text = "其他";
             // 
             // comboFunctionParamSet
             // 
-            comboFunctionParamSet.FormattingEnabled = true;
-            comboFunctionParamSet.Location = new Point(136, 73);
+            comboFunctionParamSet.Location = new Point(116, 73);
             comboFunctionParamSet.Name = "comboFunctionParamSet";
-            comboFunctionParamSet.Size = new Size(78, 25);
+            comboFunctionParamSet.Size = new Size(78, 23);
             comboFunctionParamSet.TabIndex = 1;
             // 
             // label9
@@ -895,10 +1275,9 @@ namespace BMS_Read_Write_1000
             // 
             // comboSelfConsumptionPower
             // 
-            comboSelfConsumptionPower.FormattingEnabled = true;
-            comboSelfConsumptionPower.Location = new Point(136, 42);
+            comboSelfConsumptionPower.Location = new Point(116, 42);
             comboSelfConsumptionPower.Name = "comboSelfConsumptionPower";
-            comboSelfConsumptionPower.Size = new Size(78, 25);
+            comboSelfConsumptionPower.Size = new Size(78, 23);
             comboSelfConsumptionPower.TabIndex = 1;
             // 
             // label8
@@ -912,10 +1291,9 @@ namespace BMS_Read_Write_1000
             // 
             // comboSleepLeakageCurrent
             // 
-            comboSleepLeakageCurrent.FormattingEnabled = true;
-            comboSleepLeakageCurrent.Location = new Point(136, 11);
+            comboSleepLeakageCurrent.Location = new Point(116, 11);
             comboSleepLeakageCurrent.Name = "comboSleepLeakageCurrent";
-            comboSleepLeakageCurrent.Size = new Size(78, 25);
+            comboSleepLeakageCurrent.Size = new Size(78, 23);
             comboSleepLeakageCurrent.TabIndex = 1;
             // 
             // label7
@@ -927,15 +1305,47 @@ namespace BMS_Read_Write_1000
             label7.TabIndex = 0;
             label7.Text = "休眠电流(mA):";
             // 
+            // btnSleepLeakageCurrent
+            // 
+            btnSleepLeakageCurrent.Location = new Point(202, 11);
+            btnSleepLeakageCurrent.Name = "btnSleepLeakageCurrent";
+            btnSleepLeakageCurrent.Size = new Size(44, 23);
+            btnSleepLeakageCurrent.TabIndex = 1;
+            btnSleepLeakageCurrent.Text = "确定";
+            btnSleepLeakageCurrent.UseVisualStyleBackColor = true;
+            btnSleepLeakageCurrent.Click += BtnSleepLeakageCurrent_Click;
+            // 
+            // btnSelfConsumptionPower
+            // 
+            btnSelfConsumptionPower.Location = new Point(202, 42);
+            btnSelfConsumptionPower.Name = "btnSelfConsumptionPower";
+            btnSelfConsumptionPower.Size = new Size(44, 23);
+            btnSelfConsumptionPower.TabIndex = 1;
+            btnSelfConsumptionPower.Text = "确定";
+            btnSelfConsumptionPower.UseVisualStyleBackColor = true;
+            btnSelfConsumptionPower.Click += BtnSelfConsumptionPower_Click;
+            // 
+            // btnFunctionParamSet
+            // 
+            btnFunctionParamSet.Location = new Point(200, 73);
+            btnFunctionParamSet.Name = "btnFunctionParamSet";
+            btnFunctionParamSet.Size = new Size(46, 23);
+            btnFunctionParamSet.TabIndex = 1;
+            btnFunctionParamSet.Text = "确定";
+            btnFunctionParamSet.UseVisualStyleBackColor = true;
+            btnFunctionParamSet.Click += BtnFunctionParamSet_Click;
+            // 
             // groupBox9
             // 
             groupBox9.Controls.Add(label53);
             groupBox9.Controls.Add(comboBALP);
             groupBox9.Controls.Add(label52);
             groupBox9.Controls.Add(comboBALV);
-            groupBox9.Location = new Point(223, 6);
+            groupBox9.Controls.Add(btnBALV);
+            groupBox9.Controls.Add(btnBALP);
+            groupBox9.Location = new Point(255, 6);
             groupBox9.Name = "groupBox9";
-            groupBox9.Size = new Size(226, 84);
+            groupBox9.Size = new Size(256, 84);
             groupBox9.TabIndex = 11;
             groupBox9.TabStop = false;
             groupBox9.Text = "均衡参数";
@@ -951,10 +1361,9 @@ namespace BMS_Read_Write_1000
             // 
             // comboBALP
             // 
-            comboBALP.FormattingEnabled = true;
             comboBALP.Location = new Point(116, 51);
             comboBALP.Name = "comboBALP";
-            comboBALP.Size = new Size(98, 25);
+            comboBALP.Size = new Size(80, 23);
             comboBALP.TabIndex = 2;
             // 
             // label52
@@ -968,11 +1377,30 @@ namespace BMS_Read_Write_1000
             // 
             // comboBALV
             // 
-            comboBALV.FormattingEnabled = true;
             comboBALV.Location = new Point(116, 20);
             comboBALV.Name = "comboBALV";
-            comboBALV.Size = new Size(98, 25);
+            comboBALV.Size = new Size(80, 23);
             comboBALV.TabIndex = 2;
+            // 
+            // btnBALV
+            // 
+            btnBALV.Location = new Point(202, 20);
+            btnBALV.Name = "btnBALV";
+            btnBALV.Size = new Size(44, 23);
+            btnBALV.TabIndex = 1;
+            btnBALV.Text = "确定";
+            btnBALV.UseVisualStyleBackColor = true;
+            btnBALV.Click += BtnBALV_Click;
+            // 
+            // btnBALP
+            // 
+            btnBALP.Location = new Point(202, 51);
+            btnBALP.Name = "btnBALP";
+            btnBALP.Size = new Size(44, 23);
+            btnBALP.TabIndex = 1;
+            btnBALP.Text = "确定";
+            btnBALP.UseVisualStyleBackColor = true;
+            btnBALP.Click += BtnBALP_Click;
             // 
             // groupBox3
             // 
@@ -988,59 +1416,59 @@ namespace BMS_Read_Write_1000
             groupBox3.Controls.Add(label16);
             groupBox3.Controls.Add(label15);
             groupBox3.Controls.Add(label14);
+            groupBox3.Controls.Add(btnCC);
+            groupBox3.Controls.Add(btnCCDelay);
+            groupBox3.Controls.Add(btnDC1);
+            groupBox3.Controls.Add(btnDC1Delay);
+            groupBox3.Controls.Add(btnDC2);
+            groupBox3.Controls.Add(btnDC2Delay);
             groupBox3.Location = new Point(8, 235);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(209, 208);
+            groupBox3.Size = new Size(243, 208);
             groupBox3.TabIndex = 1;
             groupBox3.TabStop = false;
             groupBox3.Text = "过流保护";
             // 
             // comboDC2Delay
             // 
-            comboDC2Delay.FormattingEnabled = true;
             comboDC2Delay.Location = new Point(123, 171);
             comboDC2Delay.Name = "comboDC2Delay";
-            comboDC2Delay.Size = new Size(78, 25);
+            comboDC2Delay.Size = new Size(64, 23);
             comboDC2Delay.TabIndex = 10;
             // 
             // comboDC2
             // 
-            comboDC2.FormattingEnabled = true;
             comboDC2.Location = new Point(123, 140);
             comboDC2.Name = "comboDC2";
-            comboDC2.Size = new Size(78, 25);
+            comboDC2.Size = new Size(64, 23);
             comboDC2.TabIndex = 10;
             // 
             // comboDC1Delay
             // 
-            comboDC1Delay.FormattingEnabled = true;
             comboDC1Delay.Location = new Point(123, 109);
             comboDC1Delay.Name = "comboDC1Delay";
-            comboDC1Delay.Size = new Size(78, 25);
+            comboDC1Delay.Size = new Size(64, 23);
             comboDC1Delay.TabIndex = 10;
             // 
             // comboDC1
             // 
-            comboDC1.FormattingEnabled = true;
             comboDC1.Location = new Point(121, 78);
             comboDC1.Name = "comboDC1";
-            comboDC1.Size = new Size(78, 25);
+            comboDC1.Size = new Size(64, 23);
             comboDC1.TabIndex = 10;
             // 
             // comboCCDelay
             // 
-            comboCCDelay.FormattingEnabled = true;
             comboCCDelay.Location = new Point(121, 47);
             comboCCDelay.Name = "comboCCDelay";
-            comboCCDelay.Size = new Size(78, 25);
+            comboCCDelay.Size = new Size(64, 23);
             comboCCDelay.TabIndex = 10;
             // 
             // comboCC
             // 
-            comboCC.FormattingEnabled = true;
             comboCC.Location = new Point(121, 16);
             comboCC.Name = "comboCC";
-            comboCC.Size = new Size(78, 25);
+            comboCC.Size = new Size(64, 23);
             comboCC.TabIndex = 10;
             // 
             // label19
@@ -1097,6 +1525,66 @@ namespace BMS_Read_Write_1000
             label14.TabIndex = 4;
             label14.Text = "充电过流(mA):";
             // 
+            // btnCC
+            // 
+            btnCC.Location = new Point(191, 16);
+            btnCC.Name = "btnCC";
+            btnCC.Size = new Size(40, 23);
+            btnCC.TabIndex = 1;
+            btnCC.Text = "确定";
+            btnCC.UseVisualStyleBackColor = true;
+            btnCC.Click += BtnCC_Click;
+            // 
+            // btnCCDelay
+            // 
+            btnCCDelay.Location = new Point(191, 47);
+            btnCCDelay.Name = "btnCCDelay";
+            btnCCDelay.Size = new Size(40, 23);
+            btnCCDelay.TabIndex = 1;
+            btnCCDelay.Text = "确定";
+            btnCCDelay.UseVisualStyleBackColor = true;
+            btnCCDelay.Click += BtnCCDelay_Click;
+            // 
+            // btnDC1
+            // 
+            btnDC1.Location = new Point(191, 78);
+            btnDC1.Name = "btnDC1";
+            btnDC1.Size = new Size(40, 23);
+            btnDC1.TabIndex = 1;
+            btnDC1.Text = "确定";
+            btnDC1.UseVisualStyleBackColor = true;
+            btnDC1.Click += BtnDC1_Click;
+            // 
+            // btnDC1Delay
+            // 
+            btnDC1Delay.Location = new Point(193, 109);
+            btnDC1Delay.Name = "btnDC1Delay";
+            btnDC1Delay.Size = new Size(40, 23);
+            btnDC1Delay.TabIndex = 1;
+            btnDC1Delay.Text = "确定";
+            btnDC1Delay.UseVisualStyleBackColor = true;
+            btnDC1Delay.Click += BtnDC1Delay_Click;
+            // 
+            // btnDC2
+            // 
+            btnDC2.Location = new Point(193, 140);
+            btnDC2.Name = "btnDC2";
+            btnDC2.Size = new Size(40, 23);
+            btnDC2.TabIndex = 1;
+            btnDC2.Text = "确定";
+            btnDC2.UseVisualStyleBackColor = true;
+            btnDC2.Click += BtnDC2_Click;
+            // 
+            // btnDC2Delay
+            // 
+            btnDC2Delay.Location = new Point(193, 171);
+            btnDC2Delay.Name = "btnDC2Delay";
+            btnDC2Delay.Size = new Size(40, 23);
+            btnDC2Delay.TabIndex = 1;
+            btnDC2Delay.Text = "确定";
+            btnDC2Delay.UseVisualStyleBackColor = true;
+            btnDC2Delay.Click += BtnDC2Delay_Click;
+            // 
             // groupBox2
             // 
             groupBox2.Controls.Add(comboUCDelay);
@@ -1106,35 +1594,35 @@ namespace BMS_Read_Write_1000
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(label4);
             groupBox2.Controls.Add(label3);
+            groupBox2.Controls.Add(btnUCV);
+            groupBox2.Controls.Add(btnUCR);
+            groupBox2.Controls.Add(btnUCDelay);
             groupBox2.Location = new Point(6, 120);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(211, 109);
+            groupBox2.Size = new Size(243, 109);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             groupBox2.Text = "过放保护";
             // 
             // comboUCDelay
             // 
-            comboUCDelay.FormattingEnabled = true;
             comboUCDelay.Location = new Point(123, 78);
             comboUCDelay.Name = "comboUCDelay";
-            comboUCDelay.Size = new Size(78, 25);
+            comboUCDelay.Size = new Size(64, 23);
             comboUCDelay.TabIndex = 1;
             // 
             // comboUCR
             // 
-            comboUCR.FormattingEnabled = true;
             comboUCR.Location = new Point(123, 47);
             comboUCR.Name = "comboUCR";
-            comboUCR.Size = new Size(78, 25);
+            comboUCR.Size = new Size(64, 23);
             comboUCR.TabIndex = 1;
             // 
             // comboUCV
             // 
-            comboUCV.FormattingEnabled = true;
             comboUCV.Location = new Point(123, 16);
             comboUCV.Name = "comboUCV";
-            comboUCV.Size = new Size(78, 25);
+            comboUCV.Size = new Size(64, 23);
             comboUCV.TabIndex = 1;
             // 
             // label6
@@ -1172,6 +1660,36 @@ namespace BMS_Read_Write_1000
             label3.Size = new Size(0, 17);
             label3.TabIndex = 0;
             // 
+            // btnUCV
+            // 
+            btnUCV.Location = new Point(193, 16);
+            btnUCV.Name = "btnUCV";
+            btnUCV.Size = new Size(40, 23);
+            btnUCV.TabIndex = 1;
+            btnUCV.Text = "确定";
+            btnUCV.UseVisualStyleBackColor = true;
+            btnUCV.Click += BtnUCV_Click;
+            // 
+            // btnUCR
+            // 
+            btnUCR.Location = new Point(193, 47);
+            btnUCR.Name = "btnUCR";
+            btnUCR.Size = new Size(40, 23);
+            btnUCR.TabIndex = 1;
+            btnUCR.Text = "确定";
+            btnUCR.UseVisualStyleBackColor = true;
+            btnUCR.Click += BtnUCR_Click;
+            // 
+            // btnUCDelay
+            // 
+            btnUCDelay.Location = new Point(193, 78);
+            btnUCDelay.Name = "btnUCDelay";
+            btnUCDelay.Size = new Size(40, 23);
+            btnUCDelay.TabIndex = 1;
+            btnUCDelay.Text = "确定";
+            btnUCDelay.UseVisualStyleBackColor = true;
+            btnUCDelay.Click += BtnUCDelay_Click;
+            // 
             // groupBox1
             // 
             groupBox1.Controls.Add(comboOCDelay);
@@ -1180,35 +1698,35 @@ namespace BMS_Read_Write_1000
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(label26);
+            groupBox1.Controls.Add(btnOCV);
+            groupBox1.Controls.Add(btnOCR);
+            groupBox1.Controls.Add(btnOCDelay);
             groupBox1.Location = new Point(6, 6);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(211, 108);
+            groupBox1.Size = new Size(243, 108);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "过充保护";
             // 
             // comboOCDelay
             // 
-            comboOCDelay.FormattingEnabled = true;
             comboOCDelay.Location = new Point(123, 78);
             comboOCDelay.Name = "comboOCDelay";
-            comboOCDelay.Size = new Size(78, 25);
+            comboOCDelay.Size = new Size(64, 23);
             comboOCDelay.TabIndex = 1;
             // 
             // comboOCR
             // 
-            comboOCR.FormattingEnabled = true;
             comboOCR.Location = new Point(123, 47);
             comboOCR.Name = "comboOCR";
-            comboOCR.Size = new Size(78, 25);
+            comboOCR.Size = new Size(64, 23);
             comboOCR.TabIndex = 1;
             // 
             // comboOCV
             // 
-            comboOCV.FormattingEnabled = true;
             comboOCV.Location = new Point(123, 16);
             comboOCV.Name = "comboOCV";
-            comboOCV.Size = new Size(78, 25);
+            comboOCV.Size = new Size(64, 23);
             comboOCV.TabIndex = 1;
             // 
             // label2
@@ -1238,6 +1756,36 @@ namespace BMS_Read_Write_1000
             label26.TabIndex = 0;
             label26.Text = "过充电压:";
             // 
+            // btnOCV
+            // 
+            btnOCV.Location = new Point(193, 16);
+            btnOCV.Name = "btnOCV";
+            btnOCV.Size = new Size(40, 23);
+            btnOCV.TabIndex = 1;
+            btnOCV.Text = "确定";
+            btnOCV.UseVisualStyleBackColor = true;
+            btnOCV.Click += BtnOCV_Click;
+            // 
+            // btnOCR
+            // 
+            btnOCR.Location = new Point(193, 47);
+            btnOCR.Name = "btnOCR";
+            btnOCR.Size = new Size(40, 23);
+            btnOCR.TabIndex = 1;
+            btnOCR.Text = "确定";
+            btnOCR.UseVisualStyleBackColor = true;
+            btnOCR.Click += BtnOCR_Click;
+            // 
+            // btnOCDelay
+            // 
+            btnOCDelay.Location = new Point(193, 78);
+            btnOCDelay.Name = "btnOCDelay";
+            btnOCDelay.Size = new Size(40, 23);
+            btnOCDelay.TabIndex = 1;
+            btnOCDelay.Text = "确定";
+            btnOCDelay.UseVisualStyleBackColor = true;
+            btnOCDelay.Click += BtnOCDelay_Click;
+            // 
             // groupBox4
             // 
             groupBox4.Controls.Add(lblFirmwareVersion);
@@ -1266,7 +1814,7 @@ namespace BMS_Read_Write_1000
             groupBox4.Controls.Add(label20);
             groupBox4.Controls.Add(progressBarSoc);
             groupBox4.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            groupBox4.Location = new Point(720, 28);
+            groupBox4.Location = new Point(806, 28);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(215, 552);
             groupBox4.TabIndex = 1;
@@ -1508,13 +2056,15 @@ namespace BMS_Read_Write_1000
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(947, 584);
+            ClientSize = new Size(1030, 584);
             Controls.Add(groupBox4);
             Controls.Add(tabControl1);
             Name = "Form1";
             Text = "BMS 监控系统 V1.0";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            groupBox6.ResumeLayout(false);
+            groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvStatusInfo).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvCellVoltages).EndInit();
             groupBox17.ResumeLayout(false);
@@ -1555,16 +2105,16 @@ namespace BMS_Read_Write_1000
         private Label label21;
         private GroupBox groupBox9;
         private Label label53;
-        private ComboBox comboBALP;
+        private TextBox comboBALP;
         private Label label52;
-        private ComboBox comboBALV;
+        private TextBox comboBALV;
         private GroupBox groupBox3;
-        private ComboBox comboDC2Delay;
-        private ComboBox comboDC2;
-        private ComboBox comboDC1Delay;
-        private ComboBox comboDC1;
-        private ComboBox comboCCDelay;
-        private ComboBox comboCC;
+        private TextBox comboDC2Delay;
+        private TextBox comboDC2;
+        private TextBox comboDC1Delay;
+        private TextBox comboDC1;
+        private TextBox comboCCDelay;
+        private TextBox comboCC;
         private Label label19;
         private Label label18;
         private Label label17;
@@ -1572,17 +2122,17 @@ namespace BMS_Read_Write_1000
         private Label label15;
         private Label label14;
         private GroupBox groupBox2;
-        private ComboBox comboUCDelay;
-        private ComboBox comboUCR;
-        private ComboBox comboUCV;
+        private TextBox comboUCDelay;
+        private TextBox comboUCR;
+        private TextBox comboUCV;
         private Label label6;
         private Label label5;
         private Label label4;
         private Label label3;
         private GroupBox groupBox1;
-        private ComboBox comboOCDelay;
-        private ComboBox comboOCR;
-        private ComboBox comboOCV;
+        private TextBox comboOCDelay;
+        private TextBox comboOCR;
+        private TextBox comboOCV;
         private Label label2;
         private Label label1;
         private Label label26;
@@ -1594,33 +2144,33 @@ namespace BMS_Read_Write_1000
         private Label label51;
         private Label label54;
         private GroupBox groupBox10;
-        private ComboBox comboFunctionParamSet;
+        private TextBox comboFunctionParamSet;
         private Label label9;
-        private ComboBox comboSelfConsumptionPower;
+        private TextBox comboSelfConsumptionPower;
         private Label label8;
-        private ComboBox comboSleepLeakageCurrent;
+        private TextBox comboSleepLeakageCurrent;
         private Label label7;
-        private ComboBox comboDischargeUnderTempRestore;
-        private ComboBox comboDischargeUnderTempProtect;
-        private ComboBox comboDischargeOverTempRestore;
-        private ComboBox comboDischargeOverTempProtect;
-        private ComboBox comboChargeUnderTempRestore;
-        private ComboBox comboChargeUnderTempProtect;
-        private ComboBox comboChargeOverTempRestore;
-        private ComboBox comboChargeOverTempProtect;
+        private TextBox comboDischargeUnderTempRestore;
+        private TextBox comboDischargeUnderTempProtect;
+        private TextBox comboDischargeOverTempRestore;
+        private TextBox comboDischargeOverTempProtect;
+        private TextBox comboChargeUnderTempRestore;
+        private TextBox comboChargeUnderTempProtect;
+        private TextBox comboChargeOverTempRestore;
+        private TextBox comboChargeOverTempProtect;
         private GroupBox groupBox13;
         private Label label57;
         private GroupBox groupBox12;
         private Label label56;
-        private ComboBox comboMosOverTempProtect;
-        private ComboBox comboMosOverTempRestore;
+        private TextBox comboMosOverTempProtect;
+        private TextBox comboMosOverTempRestore;
         private Label label55;
         private GroupBox groupBox14;
         private ComboBox comboFwBaudRate;
         private Label label59;
         private Label label58;
-        private ComboBox comboDischargeCorrection;
-        private ComboBox comboChargeCorrection;
+        private TextBox comboDischargeCorrection;
+        private TextBox comboChargeCorrection;
         private RichTextBox richTextBox1;
         private GroupBox groupBox15;
         private Button btn_CurrentZeroing;
@@ -1685,5 +2235,56 @@ namespace BMS_Read_Write_1000
         private DataGridViewTextBoxColumn colBalance;
         private DataGridViewTextBoxColumn cm_Name;
         private DataGridViewTextBoxColumn cm_Value;
+
+        private Button btnOCV;
+        private Button btnOCR;
+        private Button btnOCDelay;
+        private Button btnUCV;
+        private Button btnUCR;
+        private Button btnUCDelay;
+        private Button btnCC;
+        private Button btnCCDelay;
+        private Button btnDC1;
+        private Button btnDC1Delay;
+        private Button btnDC2;
+        private Button btnDC2Delay;
+        private Button btnBALV;
+        private Button btnBALP;
+        private Button btnSleepLeakageCurrent;
+        private Button btnSelfConsumptionPower;
+        private Button btnFunctionParamSet;
+        private Button btnDischargeOverTempProtect;
+        private Button btnDischargeOverTempRestore;
+        private Button btnDischargeUnderTempProtect;
+        private Button btnDischargeUnderTempRestore;
+        private Button btnMosOverTempProtect;
+        private Button btnMosOverTempRestore;
+        private Button btnChargeCorrection;
+        private Button btnDischargeCorrection;
+        private Button BtnChargeOverTempProtect;
+        private Button BtnChargeOverTempRestore;
+        private Button BtnChargeUnderTempProtect;
+        private Button BtnChargeUnderTempRestore;
+        private GroupBox groupBox6;
+        private ComboBox comboBox_devtype;
+        private Label label22;
+        private ComboBox comboBox_CANIndex;
+        private ComboBox comboBox_DevIndex;
+        private Label label37;
+        private Label label35;
+        private TextBox textBox_Time1;
+        private TextBox textBox_Time0;
+        private TextBox textBox_AccMask;
+        private TextBox textBox_AccCode;
+        private Label label42;
+        private Label label40;
+        private Label label41;
+        private Label label39;
+        private Button button_StopCAN;
+        private Button button_StartCAN;
+        private ComboBox comboBox_Mode;
+        private ComboBox comboBox_Filter;
+        private Label label44;
+        private Label label43;
     }
 }
