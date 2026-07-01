@@ -8,8 +8,25 @@ namespace BMS_Read_Write_1000
         private readonly BmsDevice _bms = new();
         private readonly CanDevice _can = new();
         private readonly System.Windows.Forms.Timer _refreshTimer = new();
+        private readonly System.Windows.Forms.Timer _canPollTimer = new();
         private const string voltagedatasName = "电压(mV)";
         UInt32[] m_arrdevtype = new UInt32[20];
+
+        bool _canConnected;
+        int _canReadIndex;
+        ushort[] _cellVoltages = new ushort[32];
+        ushort[] _temperatures = new ushort[8];
+        ushort _totalVoltage;
+        short _current;
+        ushort _remainingCapacity;
+        ushort _fullCapacity;
+        ushort _cycleCount;
+        ushort _rsoc;
+        ushort _protectionFlags;
+        byte _fetStatus;
+        ushort _fwVersion;
+        byte _cellCount;
+        byte _ntcCount;
 
         public Form1()
         {
@@ -17,6 +34,8 @@ namespace BMS_Read_Write_1000
             Load += Form1_Load;
             _refreshTimer.Interval = 2000;
             _refreshTimer.Tick += RefreshTimer_Tick;
+            _canPollTimer.Interval = 100;
+            _canPollTimer.Tick += CanPollTimer_Tick;
             _bms.LogMessage += (_, msg) =>
             {
                 if (InvokeRequired)
@@ -55,6 +74,8 @@ namespace BMS_Read_Write_1000
             comboBox_devtype.MaxDropDownItems = comboBox_devtype.Items.Count;
             #endregion
 
+            button_StartCAN.Click += BtnStartCan_Click;
+            button_StopCAN.Click += BtnStopCan_Click;
 
             foreach (string port in SerialPort.GetPortNames())
                 comboPort.Items.Add(port);
@@ -64,6 +85,7 @@ namespace BMS_Read_Write_1000
             comboBaud.SelectedItem ??= "9600";
 
             initDgvStatusInfo();
+            _can.DataReceived += OnCanDataReceived;
         }
 
         private void BtnConnect_Click(object? sender, EventArgs e)
@@ -97,8 +119,6 @@ namespace BMS_Read_Write_1000
             }
         }
 
-        bool _canConnected;
-
         public bool ConnectCan(uint devType, uint devIndex, uint canIndex)
         {
             if (_canConnected)
@@ -125,8 +145,9 @@ namespace BMS_Read_Write_1000
             }
 
             _canConnected = true;
-            _can.DataReceived += OnCanDataReceived;
             _can.StartCAN();
+            _canReadIndex = 0;
+            _canPollTimer.Start();
             return true;
         }
 
@@ -134,7 +155,7 @@ namespace BMS_Read_Write_1000
         {
             if (_canConnected)
             {
-                _can.DataReceived -= OnCanDataReceived;
+                _canPollTimer.Stop();
                 _can.Close();
                 _canConnected = false;
             }
@@ -152,17 +173,208 @@ namespace BMS_Read_Write_1000
 
         void ProcessCanFrame(VCI_CAN_OBJ obj)
         {
-            var sb = new System.Text.StringBuilder();
-            sb.Append("CAN: ID=0x").Append(obj.ID.ToString("X"));
-            sb.Append(obj.RemoteFlag == 0 ? " 数据帧" : " 远程帧");
-            sb.Append(obj.ExternFlag == 0 ? " 标准帧" : " 扩展帧");
-            if (obj.RemoteFlag == 0)
+            if (obj.RemoteFlag != 0) return;
+
+            var log = new System.Text.StringBuilder();
+            log.Append("CAN RX: ID=0x").Append(obj.ID.ToString("X3")).Append(" [");
+            for (int i = 0; i < obj.DataLen && i < obj.Data.Length; i++)
+                log.Append(' ').Append(obj.Data[i].ToString("X2"));
+            log.Append(" ]");
+
+            byte[] d = obj.Data;
+            int len = obj.DataLen;
+            bool crcOk = len >= 2 && CanProtocol.VerifyCrc(d, len);
+
+            switch (obj.ID)
             {
-                sb.Append(" 数据:");
-                for (int i = 0; i < obj.DataLen && i < obj.Data.Length; i++)
-                    sb.Append(' ').Append(obj.Data[i].ToString("X2"));
+                case 0x300:
+                    if (len >= 8 && crcOk)
+                    {
+                        _totalVoltage = CanProtocol.GetU16(d, 0);
+                        _current = CanProtocol.GetI16(d, 2);
+                        _remainingCapacity = CanProtocol.GetU16(d, 4);
+                        tx_TotalVoltage.Text = $"{_totalVoltage / 100.0:F2} V";
+                        tx_Current.Text = $"{_current / 100.0:F2} A";
+                        txtTotalCapacity.Text = _remainingCapacity.ToString();
+                    }
+                    break;
+
+                case 0x301:
+                    if (len >= 8 && crcOk)
+                    {
+                        _fullCapacity = CanProtocol.GetU16(d, 0);
+                        _cycleCount = CanProtocol.GetU16(d, 2);
+                        _rsoc = CanProtocol.GetU16(d, 4);
+                        txtBatteryCycles.Text = _cycleCount.ToString();
+                        labelSoc.Text = $"{_rsoc / 10.0:F1} %";
+                        progressBarSoc.Value = Math.Min((int)_rsoc, 1000);
+                    }
+                    break;
+
+                case 0x302:
+                    if (len >= 8 && crcOk)
+                    {
+                        ushort balanceLow = CanProtocol.GetU16(d, 0);
+                        ushort balanceHigh = CanProtocol.GetU16(d, 2);
+                        _protectionFlags = CanProtocol.GetU16(d, 4);
+                        lblWarning.Text = CanProtocol.GetProtectionText(_protectionFlags);
+                        panelOverVoltage.BackColor = CanProtocol.IsBitSet(_protectionFlags, 0) ? Color.Red : Color.Green;
+                        panelUnderVoltage.BackColor = CanProtocol.IsBitSet(_protectionFlags, 1) ? Color.Red : Color.Green;
+                        bool overTemp = CanProtocol.IsBitSet(_protectionFlags, 2) || CanProtocol.IsBitSet(_protectionFlags, 4) || CanProtocol.IsBitSet(_protectionFlags, 8);
+                        bool underTemp = CanProtocol.IsBitSet(_protectionFlags, 3) || CanProtocol.IsBitSet(_protectionFlags, 5);
+                        bool overCurr = CanProtocol.IsBitSet(_protectionFlags, 6) || CanProtocol.IsBitSet(_protectionFlags, 7);
+                        panelOverTemp.BackColor = overTemp ? Color.Red : Color.Green;
+                        panelUnderTemp.BackColor = underTemp ? Color.Red : Color.Green;
+                        panelOverCurrent.BackColor = overCurr ? Color.Red : Color.Green;
+                    }
+                    break;
+
+                case 0x303:
+                    if (len >= 8 && crcOk)
+                    {
+                        _fetStatus = d[0];
+                        _fwVersion = CanProtocol.GetU16(d, 4);
+                        bool chargeMos = (_fetStatus & 0x01) != 0;
+                        bool dischargeMos = (_fetStatus & 0x02) != 0;
+                        panelChargeMos.BackColor = chargeMos ? Color.Green : Color.Red;
+                        panelDischargeMos.BackColor = dischargeMos ? Color.Green : Color.Red;
+                        lblFirmwareVersion.Text = _fwVersion.ToString();
+                    }
+                    break;
+
+                case 0x304:
+                    if (len >= 4 && crcOk)
+                    {
+                        _cellCount = d[0];
+                        _ntcCount = d[1];
+                    }
+                    break;
+
+                case 0x305:
+                    if (len >= 8 && crcOk)
+                    {
+                        for (int i = 0; i < 3 && i < _ntcCount; i++)
+                        {
+                            _temperatures[i] = CanProtocol.GetU16(d, i * 2);
+                            UpdateTemperatureDisplay(i);
+                        }
+                    }
+                    break;
+
+                case 0x306:
+                    if (len >= 8 && crcOk)
+                    {
+                        for (int i = 0; i < 3 && i + 3 < _ntcCount; i++)
+                        {
+                            _temperatures[i + 3] = CanProtocol.GetU16(d, i * 2);
+                            UpdateTemperatureDisplay(i + 3);
+                        }
+                    }
+                    break;
+
+                case 0x307:
+                    if (len >= 6 && crcOk)
+                    {
+                        for (int i = 0; i < 2 && i + 6 < _ntcCount; i++)
+                        {
+                            _temperatures[i + 6] = CanProtocol.GetU16(d, i * 2);
+                            UpdateTemperatureDisplay(i + 6);
+                        }
+                    }
+                    break;
+
+                case 0x308: ParseCellVoltages(d, len, crcOk, 0); break;
+                case 0x309: ParseCellVoltages(d, len, crcOk, 3); break;
+                case 0x30A: ParseCellVoltages(d, len, crcOk, 6); break;
+                case 0x30B: ParseCellVoltages(d, len, crcOk, 9); break;
+                case 0x30C: ParseCellVoltages(d, len, crcOk, 12); break;
+                case 0x30D: ParseCellVoltages(d, len, crcOk, 15); break;
+                case 0x30E: ParseCellVoltages(d, len, crcOk, 18); break;
+                case 0x30F: ParseCellVoltages(d, len, crcOk, 21); break;
+
+                default:
+                    if (obj.ID >= 0x310 && obj.ID <= 0x333 && len >= 4 && crcOk)
+                    {
+                        if (d[0] == 0x55 && d[1] == 0xAA)
+                        {
+                            log.Append(" 写入成功");
+                            AppendLog("CAN: 参数写入成功");
+                        }
+                    }
+                    break;
             }
-            AppendLog(sb.ToString());
+
+            AppendLog(log.ToString());
+        }
+
+        void ParseCellVoltages(byte[] d, int len, bool crcOk, int cellIndex)
+        {
+            if (!crcOk || len < 8) return;
+            int dataLen = Math.Min(3, (len - 2) / 2);
+            for (int i = 0; i < dataLen && cellIndex + i < _cellVoltages.Length; i++)
+            {
+                _cellVoltages[cellIndex + i] = CanProtocol.GetU16(d, i * 2);
+            }
+            UpdateCellVoltageGrid();
+        }
+
+        void UpdateCellVoltageGrid()
+        {
+            if (_cellCount == 0) return;
+            if (dgvCellVoltages.Rows.Count == 0)
+            {
+                for (int i = 0; i < _cellCount; i++)
+                {
+                    dgvCellVoltages.Rows.Add();
+                    dgvCellVoltages.Rows[i].Cells[0].Value = i + 1;
+                    dgvCellVoltages.Rows[i].Cells[1].Value = voltagedatasName;
+                    dgvCellVoltages.Rows[i].Cells[2].Value = _cellVoltages[i].ToString();
+                }
+            }
+            else
+            {
+                int maxRow = Math.Min(_cellCount, dgvCellVoltages.Rows.Count);
+                for (int i = 0; i < maxRow; i++)
+                    dgvCellVoltages.Rows[i].Cells[2].Value = _cellVoltages[i].ToString();
+            }
+        }
+
+        void UpdateTemperatureDisplay(int index)
+        {
+            if (index >= 8) return;
+            int celsius = CanProtocol.RawToCelsius(_temperatures[index]);
+            if (index < 8 && dgvStatusInfo.Rows.Count > 9 + index)
+                dgvStatusInfo.Rows[9 + index].Cells[1].Value = celsius.ToString();
+        }
+
+        void CanPollTimer_Tick(object? sender, EventArgs e)
+        {
+            _canPollTimer.Stop();
+            try
+            {
+                if (!_canConnected) return;
+                uint[] ids = CanProtocol.AllReadIds;
+                uint id = ids[_canReadIndex];
+                _canReadIndex = (_canReadIndex + 1) % ids.Length;
+                _can.SendRemoteFrame(id);
+            }
+            finally
+            {
+                _canPollTimer.Start();
+            }
+        }
+
+        void BtnStartCan_Click(object? sender, EventArgs e)
+        {
+            uint devType = m_arrdevtype[comboBox_devtype.SelectedIndex];
+            uint devIndex = (uint)comboBox_DevIndex.SelectedIndex;
+            uint canIndex = (uint)comboBox_CANIndex.SelectedIndex;
+            ConnectCan(devType, devIndex, canIndex);
+        }
+
+        void BtnStopCan_Click(object? sender, EventArgs e)
+        {
+            DisconnectCan();
         }
 
         private async void RefreshTimer_Tick(object? sender, EventArgs e)
@@ -396,46 +608,53 @@ namespace BMS_Read_Write_1000
             base.Dispose(disposing);
         }
 
+        void CanWriteCommand(uint canId, byte b0, byte b1)
+        {
+            Task.Run(() =>
+            {
+                if (_canConnected)
+                    _can.WriteCommand(canId, b0, b1);
+                else
+                {
+                    BmsRegisters.SlaveAddress = byte.Parse(comboSlaveAddress.Text);
+                    _bms.WriteSingleRegister(BmsRegisters.ChargeOnDischargeOff, 0x0001);
+                }
+            });
+        }
+
         private void btn_ChargeOnDischargeOff_Click(object sender, EventArgs e)
         {
-            BmsRegisters.SlaveAddress = byte.Parse(comboSlaveAddress.Text);
-            _bms.WriteSingleRegister(BmsRegisters.ChargeOnDischargeOff, 0x0001);
+            CanWriteCommand(CanProtocol.Write.ChargeOnDischargeOff, 0x00, 0x01);
         }
 
         private void btn_ChargeOffDischargeOn_Click(object sender, EventArgs e)
         {
-            BmsRegisters.SlaveAddress = byte.Parse(comboSlaveAddress.Text);
-            _bms.WriteSingleRegister(BmsRegisters.ChargeOffDischargeOn, 0x0001);
+            CanWriteCommand(CanProtocol.Write.ChargeOffDischargeOn, 0x00, 0x02);
         }
 
         private void btn_ChargeOnDischargeOn_Click(object sender, EventArgs e)
         {
-            BmsRegisters.SlaveAddress = byte.Parse(comboSlaveAddress.Text);
-            _bms.WriteSingleRegister(BmsRegisters.ChargeOnDischargeOn, 0x0001);
+            CanWriteCommand(CanProtocol.Write.ChargeOnDischargeOn, 0x00, 0x03);
         }
 
         private void btn_ChargeOffDischargeOff_Click(object sender, EventArgs e)
         {
-            BmsRegisters.SlaveAddress = byte.Parse(comboSlaveAddress.Text);
-            _bms.WriteSingleRegister(BmsRegisters.ChargeOffDischargeOff, 0x0001);
+            CanWriteCommand(CanProtocol.Write.ChargeOffDischargeOff, 0x00, 0x04);
         }
 
         private void btn_ExitManulMode_Click(object sender, EventArgs e)
         {
-            BmsRegisters.SlaveAddress = byte.Parse(comboSlaveAddress.Text);
-            _bms.WriteSingleRegister(BmsRegisters.ExitManualMode, 0x0001);
+            CanWriteCommand(CanProtocol.Write.ExitManualMode, 0x00, 0x07);
         }
 
         private void btn_CurrentZeroing_Click(object sender, EventArgs e)
         {
-            BmsRegisters.SlaveAddress = byte.Parse(comboSlaveAddress.Text);
-            _bms.WriteSingleRegister(BmsRegisters.CurrentZeroing, 0x0001);
+            CanWriteCommand(CanProtocol.Write.CurrentZeroing, 0x00, 0x05);
         }
 
         private void btn_RestoreFactoryDefault_Click(object sender, EventArgs e)
         {
-            BmsRegisters.SlaveAddress = byte.Parse(comboSlaveAddress.Text);
-            _bms.WriteSingleRegister(BmsRegisters.RestoreFactoryDefault, 0x0001);
+            CanWriteCommand(CanProtocol.Write.RestoreFactory, 0x00, 0x06);
         }
 
         private void btn_StopMonitoring_Click(object sender, EventArgs e)
@@ -443,12 +662,56 @@ namespace BMS_Read_Write_1000
 
         }
 
+        static uint CanWriteIdForRegister(ushort reg)
+        {
+            return reg switch
+            {
+                BmsRegisters.OverVoltageProtectValue => CanProtocol.Write.OverVoltageProtect,
+                BmsRegisters.OverVoltageRestoreValue => CanProtocol.Write.OverVoltageRestore,
+                BmsRegisters.OverVoltageProtectDelay => CanProtocol.Write.OverVoltageDelay,
+                BmsRegisters.UnderVoltageProtectValue => CanProtocol.Write.UnderVoltageProtect,
+                BmsRegisters.UnderVoltageRestoreValue => CanProtocol.Write.UnderVoltageRestore,
+                BmsRegisters.UnderVoltageProtectDelay => CanProtocol.Write.UnderVoltageDelay,
+                BmsRegisters.ChargeOvercurrentValue => CanProtocol.Write.ChargeOvercurrent,
+                BmsRegisters.ChargeOvercurrentDelay => CanProtocol.Write.ChargeOvercurrentDelay,
+                BmsRegisters.DischargeOvercurrentL1 => CanProtocol.Write.DischargeOvercurrentL1,
+                BmsRegisters.DischargeOvercurrentL1Delay => CanProtocol.Write.DischargeOvercurrentL1Delay,
+                BmsRegisters.DischargeOvercurrentL2 => CanProtocol.Write.DischargeOvercurrentL2,
+                BmsRegisters.DischargeOvercurrentL2Delay => CanProtocol.Write.DischargeOvercurrentL2Delay,
+                BmsRegisters.BalanceStartVoltage => CanProtocol.Write.BalanceStartVoltage,
+                BmsRegisters.BalanceStartPressureDiff => CanProtocol.Write.BalanceStartPressureDiff,
+                BmsRegisters.SleepLeakageCurrent => CanProtocol.Write.SleepLeakageCurrent,
+                BmsRegisters.SelfConsumptionPower => CanProtocol.Write.SelfConsumptionPower,
+                BmsRegisters.FunctionParameterSet => CanProtocol.Write.FunctionParameter,
+                BmsRegisters.ChargeOvertempProtect => CanProtocol.Write.ChargeOverTempProtect,
+                BmsRegisters.ChargeOvertempRestore => CanProtocol.Write.ChargeOverTempRestore,
+                BmsRegisters.ChargeUndertempProtect => CanProtocol.Write.ChargeUnderTempProtect,
+                BmsRegisters.ChargeUndertempRestore => CanProtocol.Write.ChargeUnderTempRestore,
+                BmsRegisters.DischargeOvertempProtect => CanProtocol.Write.DischargeOverTempProtect,
+                BmsRegisters.DischargeOvertempRestore => CanProtocol.Write.DischargeOverTempRestore,
+                BmsRegisters.DischargeUndertempProtect => CanProtocol.Write.DischargeUnderTempProtect,
+                BmsRegisters.DischargeUndertempRestore => CanProtocol.Write.DischargeUnderTempRestore,
+                BmsRegisters.MosOvertempProtect => CanProtocol.Write.MosOverTempProtect,
+                BmsRegisters.MosOvertempRestore => CanProtocol.Write.MosOverTempRestore,
+                _ => 0
+            };
+        }
+
         private void WriteParam(TextBox tb, ushort reg)
         {
-            BmsRegisters.SlaveAddress = byte.Parse(comboSlaveAddress.Text);
             ushort val = ParseU16(tb);
             Task.Run(() =>
             {
+                if (_canConnected)
+                {
+                    uint canId = CanWriteIdForRegister(reg);
+                    if (canId != 0 && _can.Write2ByteParam(canId, val))
+                    {
+                        Invoke(() => AppendLog("CAN参数写入成功"));
+                        return;
+                    }
+                }
+                BmsRegisters.SlaveAddress = byte.Parse(comboSlaveAddress.Text);
                 if (_bms.WriteSingleRegister(reg, val))
                     Invoke(() => AppendLog("参数写入成功"));
                 else
@@ -483,8 +746,26 @@ namespace BMS_Read_Write_1000
         private void BtnDischargeUnderTempRestore_Click(object? sender, EventArgs e) => WriteParam(comboDischargeUnderTempRestore, BmsRegisters.DischargeUndertempRestore);
         private void BtnMosOverTempProtect_Click(object? sender, EventArgs e) => WriteParam(comboMosOverTempProtect, BmsRegisters.MosOvertempProtect);
         private void BtnMosOverTempRestore_Click(object? sender, EventArgs e) => WriteParam(comboMosOverTempRestore, BmsRegisters.MosOvertempRestore);
-        private void BtnChargeCorrection_Click(object? sender, EventArgs e) => WriteParam(comboChargeCorrection, BmsRegisters.ChargingCorrection);
-        private void BtnDischargeCorrection_Click(object? sender, EventArgs e) => WriteParam(comboDischargeCorrection, BmsRegisters.DischargingCorrection);
+        private void BtnChargeCorrection_Click(object? sender, EventArgs e)
+        {
+            if (_canConnected)
+            {
+                uint val = uint.Parse(comboChargeCorrection.Text);
+                _can.Write4ByteParam(CanProtocol.Write.ChargeCorrection, val);
+            }
+            else
+                WriteParam(comboChargeCorrection, BmsRegisters.ChargingCorrection);
+        }
+        private void BtnDischargeCorrection_Click(object? sender, EventArgs e)
+        {
+            if (_canConnected)
+            {
+                uint val = uint.Parse(comboDischargeCorrection.Text);
+                _can.Write4ByteParam(CanProtocol.Write.DischargeCorrection, val);
+            }
+            else
+                WriteParam(comboDischargeCorrection, BmsRegisters.DischargingCorrection);
+        }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -497,6 +778,11 @@ namespace BMS_Read_Write_1000
         }
 
         private void btnConnect_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_StartCAN_Click(object sender, EventArgs e)
         {
 
         }

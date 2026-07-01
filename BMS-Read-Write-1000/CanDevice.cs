@@ -244,6 +244,70 @@ public class CanDevice : IDisposable
         _cts = null;
     }
 
+    public bool SendRemoteFrame(uint id, bool externFlag = false)
+    {
+        if (!_isOpen) return false;
+        var obj = new VCI_CAN_OBJ(0)
+        {
+            ID = id,
+            RemoteFlag = 1,
+            ExternFlag = (byte)(externFlag ? 1 : 0),
+            DataLen = 0,
+            SendType = 0
+        };
+        return Transmit(ref obj);
+    }
+
+    public bool TransmitDataFrame(uint id, byte[] data, bool externFlag = false)
+    {
+        if (!_isOpen || data.Length > 8) return false;
+        var obj = new VCI_CAN_OBJ(0)
+        {
+            ID = id,
+            RemoteFlag = 0,
+            ExternFlag = (byte)(externFlag ? 1 : 0),
+            DataLen = (byte)data.Length,
+            SendType = 0
+        };
+        Array.Copy(data, obj.Data, data.Length);
+        return Transmit(ref obj);
+    }
+
+    public bool Write2ByteParam(uint id, ushort value)
+    {
+        var data = new byte[4];
+        data[0] = (byte)(value >> 8);
+        data[1] = (byte)value;
+        ushort crc = CanProtocol.Crc16Xmodem(data, 0, 2);
+        data[2] = (byte)(crc >> 8);
+        data[3] = (byte)crc;
+        return TransmitDataFrame(id, data);
+    }
+
+    public bool Write4ByteParam(uint id, uint value)
+    {
+        var data = new byte[6];
+        data[0] = (byte)(value >> 24);
+        data[1] = (byte)(value >> 16);
+        data[2] = (byte)(value >> 8);
+        data[3] = (byte)value;
+        ushort crc = CanProtocol.Crc16Xmodem(data, 0, 4);
+        data[4] = (byte)(crc >> 8);
+        data[5] = (byte)crc;
+        return TransmitDataFrame(id, data);
+    }
+
+    public bool WriteCommand(uint id, byte b0, byte b1)
+    {
+        var data = new byte[4];
+        data[0] = b0;
+        data[1] = b1;
+        ushort crc = CanProtocol.Crc16Xmodem(data, 0, 2);
+        data[2] = (byte)(crc >> 8);
+        data[3] = (byte)crc;
+        return TransmitDataFrame(id, data);
+    }
+
     public void Dispose()
     {
         Close();
